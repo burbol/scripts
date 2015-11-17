@@ -1,0 +1,159 @@
+hxcmom02:/gfs1/work/beclaila/s21_w216 $ export MDRUN="mdrun_mpi"
+hxcmom02:/gfs1/work/beclaila/s21_w216 $ export MPIRUN="aprun -n2 mdrun_mpi"
+hxcmom02:/gfs1/work/beclaila/s21_w216 $ g_tune_pme -np 2 -s NVT_sam21_water216.tpr
+                         :-)  G  R  O  M  A  C  S  (-:
+
+                          GROtesk MACabre and Sinister
+
+                            :-)  VERSION 4.6.5  (-:
+
+        Contributions from Mark Abraham, Emile Apol, Rossen Apostolov,
+           Herman J.C. Berendsen, Aldert van Buuren, Pär Bjelkmar,
+     Rudi van Drunen, Anton Feenstra, Gerrit Groenhof, Christoph Junghans,
+        Peter Kasson, Carsten Kutzner, Per Larsson, Pieter Meulenhoff,
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz,
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+         Copyright (c) 2001-2012,2013, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+       modify it under the terms of the GNU Lesser General Public License
+        as published by the Free Software Foundation; either version 2.1
+             of the License, or (at your option) any later version.
+
+                              :-)  g_tune_pme  (-:
+
+Option     Filename  Type         Description
+------------------------------------------------------------
+  -p       perf.out  Output       Generic output file
+-err   bencherr.log  Output       Log file
+ -so      tuned.tpr  Output       Run input file: tpr tpb tpa
+  -s NVT_sam21_water216.tpr  Input        Run input file: tpr tpb tpa
+  -o       traj.trr  Output       Full precision trajectory: trr trj cpt
+  -x       traj.xtc  Output, Opt. Compressed trajectory (portable xdr format)
+-cpi      state.cpt  Input, Opt.  Checkpoint file
+-cpo      state.cpt  Output, Opt. Checkpoint file
+  -c    confout.gro  Output       Structure file: gro g96 pdb etc.
+  -e       ener.edr  Output       Energy file
+  -g         md.log  Output       Log file
+-dhdl      dhdl.xvg  Output, Opt. xvgr/xmgr file
+-field    field.xvg  Output, Opt. xvgr/xmgr file
+-table    table.xvg  Input, Opt.  xvgr/xmgr file
+-tabletf    tabletf.xvg  Input, Opt.  xvgr/xmgr file
+-tablep  tablep.xvg  Input, Opt.  xvgr/xmgr file
+-tableb   table.xvg  Input, Opt.  xvgr/xmgr file
+-rerun    rerun.xtc  Input, Opt.  Trajectory: xtc trr trj gro g96 pdb cpt
+-tpi        tpi.xvg  Output, Opt. xvgr/xmgr file
+-tpid   tpidist.xvg  Output, Opt. xvgr/xmgr file
+ -ei        sam.edi  Input, Opt.  ED sampling input
+ -eo      edsam.xvg  Output, Opt. xvgr/xmgr file
+  -j       wham.gct  Input, Opt.  General coupling stuff
+ -jo        bam.gct  Output, Opt. General coupling stuff
+-ffout      gct.xvg  Output, Opt. xvgr/xmgr file
+-devout   deviatie.xvg  Output, Opt. xvgr/xmgr file
+-runav  runaver.xvg  Output, Opt. xvgr/xmgr file
+ -px      pullx.xvg  Output, Opt. xvgr/xmgr file
+ -pf      pullf.xvg  Output, Opt. xvgr/xmgr file
+ -ro   rotation.xvg  Output, Opt. xvgr/xmgr file
+ -ra  rotangles.log  Output, Opt. Log file
+ -rs   rotslabs.log  Output, Opt. Log file
+ -rt  rottorque.log  Output, Opt. Log file
+-mtx         nm.mtx  Output, Opt. Hessian matrix
+ -dn     dipole.ndx  Output, Opt. Index file
+ -bo      bench.trr  Output       Full precision trajectory: trr trj cpt
+ -bx      bench.xtc  Output       Compressed trajectory (portable xdr format)
+-bcpo     bench.cpt  Output       Checkpoint file
+ -bc      bench.gro  Output       Structure file: gro g96 pdb etc.
+ -be      bench.edr  Output       Energy file
+ -bg      bench.log  Output       Log file
+-beo   benchedo.xvg  Output, Opt. xvgr/xmgr file
+-bdhdl  benchdhdl.xvg  Output, Opt. xvgr/xmgr file
+-bfield   benchfld.xvg  Output, Opt. xvgr/xmgr file
+-btpi  benchtpi.xvg  Output, Opt. xvgr/xmgr file
+-btpid  benchtpid.xvg  Output, Opt. xvgr/xmgr file
+-bjo      bench.gct  Output, Opt. General coupling stuff
+-bffout   benchgct.xvg  Output, Opt. xvgr/xmgr file
+-bdevout   benchdev.xvg  Output, Opt. xvgr/xmgr file
+-brunav  benchrnav.xvg  Output, Opt. xvgr/xmgr file
+-bpx    benchpx.xvg  Output, Opt. xvgr/xmgr file
+-bpf    benchpf.xvg  Output, Opt. xvgr/xmgr file
+-bro   benchrot.xvg  Output, Opt. xvgr/xmgr file
+-bra  benchrota.log  Output, Opt. Log file
+-brs  benchrots.log  Output, Opt. Log file
+-brt  benchrott.log  Output, Opt. Log file
+-bmtx    benchn.mtx  Output, Opt. Hessian matrix
+-bdn      bench.ndx  Output, Opt. Index file
+
+Option       Type   Value   Description
+------------------------------------------------------
+-[no]h       bool   no      Print help info and quit
+-[no]version bool   no      Print version info and quit
+-nice        int    0       Set the nicelevel
+-xvg         enum   xmgrace  xvg plot formatting: xmgrace, xmgr or none
+-np          int    2       Number of nodes to run the tests on (must be > 2
+                            for separate PME nodes)
+-npstring    enum   -np     Specify the number of processors to $MPIRUN using
+                            this string: -np, -n or none
+-ntmpi       int    1       Number of MPI-threads to run the tests on (turns
+                            MPI & mpirun off)
+-r           int    2       Repeat each test this often
+-max         real   0.5     Max fraction of PME nodes to test with
+-min         real   0.25    Min fraction of PME nodes to test with
+-npme        enum   auto    Within -min and -max, benchmark all possible
+                            values for -npme, or just a reasonable subset.
+                            Auto neglects -min and -max and chooses
+                            reasonable values around a guess for npme derived
+                            from the .tpr: auto, all or subset
+-fix         int    -2      If >= -1, do not vary the number of PME-only
+                            nodes, instead use this fixed value and only vary
+                            rcoulomb and the PME grid spacing.
+-rmax        real   0       If >0, maximal rcoulomb for -ntpr>1 (rcoulomb
+                            upscaling results in fourier grid downscaling)
+-rmin        real   0       If >0, minimal rcoulomb for -ntpr>1
+-[no]scalevdw  bool yes     Scale rvdw along with rcoulomb
+-ntpr        int    0       Number of .tpr files to benchmark. Create this
+                            many files with different rcoulomb scaling
+                            factors depending on -rmin and -rmax. If < 1,
+                            automatically choose the number of .tpr files to
+                            test
+-steps       step   1000    Take timings for this many steps in the benchmark
+                            runs
+-resetstep   int    100     Let dlb equilibrate this many steps before
+                            timings are taken (reset cycle counters after
+                            this many steps)
+-simsteps    step   -1      If non-negative, perform this many steps in the
+                            real run (overwrites nsteps from .tpr, add .cpt
+                            steps)
+-[no]launch  bool   no      Launch the real simulation after optimization
+-[no]bench   bool   yes     Run the benchmarks or just create the input .tpr
+                            files?
+-[no]append  bool   yes     Append to previous output files when continuing
+                            from checkpoint instead of adding the simulation
+                            part number to all file names (for launch only)
+-[no]cpnum   bool   no      Keep and number checkpoint files (launch only)
+
+Reading file NVT_sam21_water216.tpr, VERSION 4.6.5 (single precision)
+
+Back Off! I just backed up perf.out to ./#perf.out.11#
+Will test 1 tpr file.
+
+Back Off! I just backed up benchtest.log to ./#benchtest.log.10#
+
+-------------------------------------------------------
+Program g_tune_pme, VERSION 4.6.5
+Source code file: /home/h/hzfbnaun/Gromacs/gromacs-4.6.5/src/tools/gmx_tune_pme.c, line: 721
+
+Fatal error:
+Cannot execute mdrun. Please check benchtest.log for problems!
+For more information and tips for troubleshooting, please check the GROMACS
+website at http://www.gromacs.org/Documentation/Errors
+-------------------------------------------------------
+
+"I'd Like Monday Mornings Better If They Started Later" (Garfield)
+
+Making sure that mdrun can be executed. Trying 'aprun -n2 mdrun_mpi -np 2 mdrun_mpi -version -maxh 0.001 1> benchtest.log 2>&1' ... hxcmom02:/gfs1/work/beclaila/s21_w216 $

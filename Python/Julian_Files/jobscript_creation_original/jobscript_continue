@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --job-name=ii_quiero_k150
+#SBATCH --mail-type=end
+#SBATCH --mem=8000
+#SBATCH --time=48:00:00
+#SBATCH --mail-user=laila@physik.fu-berlin.de
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+
+#grompp -f production.mdp -n index.ndx -p A10-B10-sol.top -c trjconv225.gro -o topol.tpr -maxwarn 1
+
+mdrun -nt 8 -s topol.tpr -o traj -x traj -e ener -g md -px -pf -maxh 48 -cpi state.cpt
+
+FirstTest=false
+SecondTest=false
+
+# check if the file "confout.gro" is there
+if [ ! -f confout.gro ]; then
+  FirstTest=true
+  echo "confout.gro not found in current directory."
+fi
+
+# check if there are more than 50 "slurm*" files
+count=`ls -l | grep slurm -c`
+if [ $count -lt 50 ]; then
+  SecondTest=true
+  echo "less than 50 simulations have been started from this directory"
+fi
+
+if [ "$FirstTest" = true -a "$SecondTest" = true ]; then
+sbatch jobscript_continue
+fi
+

@@ -1,0 +1,113 @@
+module load gromacs/single/openmpi1.4.5/4.6.5
+mdrun -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet -tunepme
+
+Using 1 MPI process
+Using 8 OpenMP threads 
+step 1100, will finish Fri May 29 16:48:07 2015
+               Core t (s)   Wall t (s)        (%)
+       Time:     2694.860      362.350      743.7
+                 (ns/day)    (hour/ns)
+Performance:        0.568       42.256
+---------------------------------------------------
+module load gromacs/single/openmpi1.4.5/4.6.5
+OMP_NUM_THREADS=2 mdrun -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme
+
+step 250, will finish Thu Jul 21 00:15:20 2016
+
+               Core t (s)   Wall t (s)        (%)
+       Time:      378.380      378.721       99.9
+                 (ns/day)    (hour/ns)
+Performance:        0.115      209.562
+
+---------------------------------------------------
+
+module load gromacs/single/openmpi1.4.5/4.6.5
+
+mdrun -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet
+
+Using 1 MPI process
+Using 8 OpenMP threads 
+step 1100, will finish Sat May 30 02:30:51 2015
+Step 1170: Run time exceeded 0.099 hours, will terminate the run
+step 1180, will finish Sat May 30 04:56:02 2015
+               Core t (s)   Wall t (s)        (%)
+       Time:     2683.870      360.865      743.7
+                 (ns/day)    (hour/ns)
+Performance:        0.566       42.439
+---------------------------------------------------
+module load gromacs/single/openmpi1.4.5/4.6.5
+
+mpirun -np 8 mdrun -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet
+
+Using 8 MPI processes
+Using 1 OpenMP thread per MPI process
+vol 0.89  imb F 15% step 1300, will finish Fri May 15 12:53:02 2015
+ Average load imbalance: 13.5 %
+ 
+               Core t (s)   Wall t (s)        (%)
+       Time:     2892.000      361.624      799.7
+                 (ns/day)    (hour/ns)
+Performance:        0.655       36.634
+---------------------------------------------------
+module load gromacs/single/openmpi1.4.5/4.6.5 
+OMP_NUM_THREADS=16  mdrun -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet => KILLED!!!!
+
+
+module load gromacs/single/thread/4.6.5
+mdrun -ntmpi 8 -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+module load gromacs/single/thread/4.6.5
+mdrun -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme
+
+Using 8 MPI threads
+Using 1 OpenMP thread per tMPI thread
+step 220, will finish Wed Oct 12 16:56:42 2016
+ Average load imbalance: 11.7 %
+               Core t (s)   Wall t (s)        (%)
+       Time:      386.500      386.713       99.9
+                 (ns/day)    (hour/ns)
+Performance:        0.099      243.032
+
+---------------------------------------------------
+module load gromacs/single/thread/4.6.5
+mpirun -np 8 mdrun -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme => KILLED!!!!
+---------------------------------------------------
+module load gromacs/single/thread/4.6.5
+mpirun -ntmpi 16  mdrun -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme  => KILLED!!!!
+
+---------------------------------------------------
+module load gromacs/single/thread/4.6.5
+OMP_NUM_THREADS=2 mdrun -ntmpi 8 -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme
+
+Using 8 MPI threads
+Using 2 OpenMP threads per tMPI thread
+
+step 220, will finish Sun Oct  2 03:12:57 2016
+ Average load imbalance: 8.1 %
+ Part of the total run time spent waiting due to load imbalance: 4.6 %
+
+
+               Core t (s)   Wall t (s)        (%)
+       Time:      379.740      379.973       99.9
+                 (ns/day)    (hour/ns)
+Performance:        0.101      238.797
+---------------------------------------------------
+module load gromacs/single/thread/4.6.5
+mdrun -ntmpi 16 -s NVT_sam21_water9000.tpr -deffnm  NVT_sam21_water9000 -maxh 0.1 -v -testverlet -tunepme => KILLED!!!!
+
+Using 16 MPI threads
+Using 1 OpenMP thread per tMPI thread
+---------------------------------------------------
+module load gromacs/single/thread/4.6.5
+mdrun -ntmpi 8 -s NVT_sam21_water8000.tpr -deffnm  NVT_sam21_water8000 -maxh 0.1 -v -testverlet
+Using 8 MPI threads
+Using 1 OpenMP thread per tMPI thread
+step 1400, will finish Wed May 13 13:12:33 2015
+ Average load imbalance: 13.4 %
+               Core t (s)   Wall t (s)        (%)
+       Time:     2889.360      361.336      799.6
+                 (ns/day)    (hour/ns)
+Performance:        0.670       35.821
+---------------------------------------------------

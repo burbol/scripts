@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#SBATCH -p test
+
+#SBATCH --mem=1024
+#SBATCH --job-name=020tests17w1000
+#SBATCH --output=s17_w1000_20test.out
+
+#SBATCH --mail-user=laila.e@fu-berlin.de
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+
+#SBATCH --ntasks=20
+#SBATCH --nodes=2
+
+#SBATCH --time=0:30:00
+
+module load slurm 
+
+module load gromacs/openmpi/gcc/64/4.5.4 
+
+STARTTIME=$(date +%s)
+
+#use sleep or testing... 
+
+cd /scratch/eixeres/s17_w1000/
+
+tpbconv -s NVT_sam17_water1000_next.tpr  -until 6 -o NVT_sam17_water1000_next_next.tpr 
+
+mpirun -np 20 mdrun -s NVT_sam17_water1000_next_next.tpr -cpi  NVT_sam17_water1000_next.cpt -maxh 0.5
+
+#cp -r /scratch/eixeres/s17_w1000/ /home/eixeres/simulations/finished/
