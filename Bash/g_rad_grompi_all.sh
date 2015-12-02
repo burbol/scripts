@@ -23,14 +23,15 @@ n=4
 #mkdir ./global_density_maps
 #mkdir ./g_rad_densmaps_next
 
-for i in 0 # OH density of the SAM 
+for i in 5 21 25 41 # OH density of the SAM 
 do
-  for j in 9000
+  for j in 2000
   #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
   do
   
   #cd /home/eixeres/files_for_laila/s${i}_w${j}_merged
-  cd /media/SHELDON/CLOSEDsheldon/eixeres/files_for_laila/s${i}_w${j}_merged
+  #cd /media/SHELDON/CLOSEDsheldon/eixeres/files_for_laila/s${i}_w${j}_merged
+  cd /net/data/eixeres/NewVersion4/FINISHED
   #cd s${i}_w${j}
   
   if [ $i -eq 0 ]
