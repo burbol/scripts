@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Script for using g_density recursively and g_rad_density in time intervals of 500 ps
+# Run script from slurm server
 
 #source /usr/local/gromacs/bin/GMXRC
-#######source /Volumes/UNI/SHELDON/CLOSEDsheldon/eixeres/gromacs_tpi_compiled/bin/GMXRC 
+#######source /Volumes/UNI/SHELDON/CLOSEDsheldon/eixeres/gromacs_tpi_compiled/bin/GMXRC
+module load gromacs/single/openmpi1.4.5/4.6.5
 
 
 # the round function:
@@ -23,15 +25,17 @@ n=4
 #mkdir ./global_density_maps
 #mkdir ./g_rad_densmaps_next
 
-for i in 5 21 25 41 # OH density of the SAM 
+for i in 25 # OH density of the SAM 
+#for i in 5 21 25 41 # OH density of the SAM 
 do
-  for j in 2000
+  for j in 9000
+  #for j in 3000 4000 5000 6500 7000 8000 9000
   #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
   do
   
   #cd /home/eixeres/files_for_laila/s${i}_w${j}_merged
   #cd /media/SHELDON/CLOSEDsheldon/eixeres/files_for_laila/s${i}_w${j}_merged
-  cd /net/data/eixeres/NewVersion4/FINISHED
+  cd /net/data/eixeres/NewVersion4/FINISHED/s${i}_w${j}
   #cd s${i}_w${j}
   
   if [ $i -eq 0 ]
@@ -75,49 +79,50 @@ do
 ########## INSERTION ENDED  ##########
 #######################################################################
     
-    #echo "0" "q"|/home/shavkat/GMX/bin/make_ndx -f Mini_sam${i}_water${j}.gro -o index${i}_${j}.ndx 
+    echo "0" "q"|make_ndx -f sam${i}_water${j}.gro -o index${i}_${j}.ndx 
  
-    #/net/clusterhome/eixeres/gromacs_tpi_compiled/bin/grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT3_sam${i}_water${j}.tpr -maxwarn 1
+    /net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
     
-    #echo ${n} | /home/shavkat/GMX/bin/g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
-    #echo "6" | /home/shavkat/GMX/bin/g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
+    echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    echo "6" | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
     
 
-    # number global density maps
-    #echo "0" "q"|make_ndx -f NVT_sam${i}_water${j}.gro -o index${i}_${j}.ndx 
+    # atom number global density maps
+    
     #grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
-    #echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}_next.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000
     #cp    ng_density_NVT_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
+    
     echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
-    cp ng_density_SAM_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
+    #cp ng_density_SAM_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
 
 #cp g_density_SAM_sam${i}_water${j}.xvg /home/eixeres/files_for_laila/global_SAMS_densmaps/
 #rm g_density_NVT_sam${i}_water${j}.xvg	
 
-#     #k=200
-#     k=0
-#     #while [[ $k -le 395 ]]  # segments of time to be multiplied by 100 so that we get [ps]
-#     while [[ $k -le 595 ]]  # segments of time to be multiplied by 100 so that we get [ps]
-#     do    
-#         k2=$((k+5))
-#         nanosecs1=$(echo $(round $k/10+425 1))
-#         nanosecs2=$(echo $(round $k2/10+425 1))
-#         start=$((k*100))
-#         ending=$((start+500))
-# 
-#         #echo "Creating densmap from $start ps to $ending ps"
-# 
-#         echo ${n} ${n} | /net/clusterhome/eixeres/g_rad_density -f NVT_sam${i}_water${j}_new.xtc -s g_rad_NVT_sam${i}_water${j}_next.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
-#         #echo ${n} ${n} | /home/eixeres/g_rad_density -f NVT_sam${i}_water${j}_next.xtc -s g_rad_NVT_sam${i}_water${j}_next.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
-#         #echo ${n} ${n} | /home/eixeres/g_rad_density -f NVT_sam${i}_water${j}_40ns.xtc -s g_rad_NVT_sam${i}_water${j}_40ns.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
-# 
-#         
-#         #cp g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg /home/eixeres/files_for_laila/g_rad_densmaps_all/
-#         
-#         #cp g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg /home/eixeres/files_for_laila/g_rad_densmaps_next/
-#         #rm g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg
-# 	
-# 	    k=$(($k+5))
-# 	done    
+    #k=200
+    k=0
+    #while [[ $k -le 395 ]]  # segments of time to be multiplied by 100 so that we get [ps]
+    while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
+    do    
+        k2=$((k+5))
+        nanosecs1=$(echo $(round $k/10+425 1))
+        nanosecs2=$(echo $(round $k2/10+425 1))
+        start=$((k*100))
+        ending=$((start+500))
+
+        #echo "Creating densmap from $start ps to $ending ps"
+
+        echo ${n} ${n} | /net/data/eixeres/sheldon-old/g_rad_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
+        #echo ${n} ${n} | /home/eixeres/g_rad_density -f NVT_sam${i}_water${j}_next.xtc -s g_rad_NVT_sam${i}_water${j}_next.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
+        #echo ${n} ${n} | /home/eixeres/g_rad_density -f NVT_sam${i}_water${j}_40ns.xtc -s g_rad_NVT_sam${i}_water${j}_40ns.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
+
+        
+        #cp g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg /home/eixeres/files_for_laila/g_rad_densmaps_all/
+        
+        #cp g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg /home/eixeres/files_for_laila/g_rad_densmaps_next/
+        #rm g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg
+	
+	    k=$(($k+5))
+	done    
   done
 done

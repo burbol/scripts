@@ -15,7 +15,8 @@ import gromacs.formats
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
-os.chdir('/Users/burbol/Desktop/scripts/Python')
+#copy first peakdetect.py to the work folder!!
+#os.chdir('/eixeres/Dropbox/scripts/Python') 
 import peakdetect
 pk = peakdetect.peakdetect
 
@@ -23,7 +24,7 @@ pk = peakdetect.peakdetect
 # which can be found at https://gist.github.com/sixtenbe/1178136.
 # This is a a copy of its original description:
 # peakdetect(y_axis, x_axis = None, lookahead = 300, delta=0):
-    """
+"""
     Converted from/based on a MATLAB script at: 
     http://billauer.co.il/peakdet.html
     
@@ -53,9 +54,11 @@ pk = peakdetect.peakdetect
         to get the average peak value do: np.mean(max_peaks, 0)[1] on the
         results to unpack one of the lists into x, y coordinates do: 
         x, y = zip(*tab)
-    """
+"""
 
-os.chdir('/Users/burbol/Downloads/global_density_maps')
+#os.chdir('/Users/burbol/Downloads/global_density_maps')
+work_folder = '/net/data/eixeres/NewVersion4/FINISHED/'
+os.chdir(work_folder)
 xvg = gromacs.formats.XVG()
 
 
@@ -65,7 +68,8 @@ print >> myfile1, '{0}  {1}'.format('File', 'Water Peaks')
 myfile = open('WaterPeaks.txt', 'w')
 print >> myfile, '{0}'.format('Water Peaks Position')
 
-pp = PdfPages('/Users/burbol/Downloads/global_density_maps/densplots.pdf')
+#pp = PdfPages('/Users/burbol/Downloads/global_density_maps/densplots.pdf')
+pp = PdfPages('densplots.pdf')
 
 ticki=np.zeros(24)
 for lm in range(0,24): 
@@ -109,9 +113,26 @@ def plot_dens(x, y, filename, point):
     
 
 # Loop through all the density files in the main directory
-for b in [0, 5, 11, 17]:
-    for c in [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]:
-        os.chdir('/Users/burbol/Downloads/global_density_maps')
+
+#for testing
+#for b in [5]:
+#    for c in [2000]:
+for b in [5, 21, 25, 41]:
+    for c in [2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]:
+        #os.chdir('/Users/burbol/Downloads/global_density_maps')
+        new_folder = work_folder + '/s'+  str(b) + '_w' + str(c)
+        
+        #print "nan' if folder doesn't exists (because the simulation hasn't been copied to the backup folder
+        # and it is still on scratch probably not finished yet) 
+        if not os.path.isdir(new_folder):
+			print >> myfile, '{0}  {1}'.format(filename, 'nan')
+			print >> myfile, '{0}'.format('nan') 
+			print b, c, "not ok"
+			continue 
+			
+        os.chdir(new_folder)
+        print b, c, "ok"
+        
         print >> myfile1, '             '
 #        print >> myfile, '             '
         filename = 'g_density_NVT_sam%d_water%d.xvg'%(b,c, ) 
