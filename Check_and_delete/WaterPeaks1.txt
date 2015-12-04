@@ -1,0 +1,57 @@
+File  Water Peaks
+             
+g_density_NVT_sam5_water2000.xvg  [5.2999999999999998, 73.470299999999995]
+             
+g_density_NVT_sam5_water3000.xvg  [5.2999999999999998, 81.980500000000006]
+             
+g_density_NVT_sam5_water4000.xvg  [5.2999999999999998, 125.224]
+             
+g_density_NVT_sam5_water5000.xvg  [5.2999999999999998, 135.137]
+             
+g_density_NVT_sam5_water6500.xvg  [5.2999999999999998, 144.11000000000001]
+g_density_NVT_sam5_water6500.xvg  nan
+             
+g_density_NVT_sam5_water8000.xvg  [5.2999999999999998, 151.74000000000001]
+             
+g_density_NVT_sam5_water9000.xvg  [5.2999999999999998, 155.714]
+             
+g_density_NVT_sam21_water2000.xvg  [5.0999999999999996, 72.451700000000002]
+             
+g_density_NVT_sam21_water3000.xvg  [5.0999999999999996, 85.0047]
+g_density_NVT_sam21_water3000.xvg  nan
+             
+g_density_NVT_sam21_water5000.xvg  [5.0999999999999996, 112.26600000000001]
+             
+g_density_NVT_sam21_water6500.xvg  [5.0999999999999996, 126.501]
+g_density_NVT_sam21_water6500.xvg  nan
+g_density_NVT_sam21_water6500.xvg  nan
+             
+g_density_NVT_sam21_water9000.xvg  [5.0999999999999996, 164.44]
+             
+g_density_NVT_sam25_water2000.xvg  [5.0599999999999996, 78.458299999999994]
+             
+g_density_NVT_sam25_water3000.xvg  [5.0800000000000001, 80.214699999999993]
+g_density_NVT_sam25_water3000.xvg  nan
+             
+g_density_NVT_sam25_water5000.xvg  [5.0800000000000001, 109.381]
+             
+g_density_NVT_sam25_water6500.xvg  [5.0800000000000001, 124.09399999999999]
+             
+g_density_NVT_sam25_water7000.xvg  [5.0800000000000001, 125.503]
+g_density_NVT_sam25_water7000.xvg  nan
+             
+g_density_NVT_sam25_water9000.xvg  [5.0800000000000001, 154.756]
+             
+g_density_NVT_sam41_water2000.xvg  [5.1200000000000001, 88.434700000000007]
+             
+g_density_NVT_sam41_water3000.xvg  [5.0999999999999996, 100.961]
+g_density_NVT_sam41_water3000.xvg  nan
+             
+g_density_NVT_sam41_water5000.xvg  [5.0999999999999996, 143.07400000000001]
+             
+g_density_NVT_sam41_water6500.xvg  [5.0999999999999996, 165.227]
+             
+g_density_NVT_sam41_water7000.xvg  [5.0999999999999996, 176.22999999999999]
+g_density_NVT_sam41_water7000.xvg  nan
+             
+g_density_NVT_sam41_water9000.xvg  [5.0999999999999996, 208.18899999999999]

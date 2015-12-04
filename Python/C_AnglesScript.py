@@ -37,17 +37,21 @@ import gromacs
 gromacs.config.setup()
 from gromacs.formats import XVG
 
-densfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
-peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
-outputfolder = "/Users/burbol2/Desktop/"
+#densfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
+#peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
+#outputfolder = "/Users/burbol2/Desktop/"
+
+densfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
+peaksfolder = densfolder
+outputfolder = densfolder
 
 # Systems to analyze:
 
 #SAM percentage of -OH coverage (polarity)
-SAMs=[0,11,17,33] 
+SAMs=[5, 21, 27, 41] 
 
 #Number of water molecules in the droplet
-Waters=[1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
+Waters=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
 
 
 #Length of longest interval analysed. 
@@ -58,16 +62,17 @@ timestep = 0.5
 
 
 # Simulation box length in the z-direction:
-boxlength={0: 12.0, 11: 12.0, 17: 12.0, 33: 20.0}
+boxlength={5: 20.0, 21: 20.0, 25: 20.0, 41: 20.0}
 
 
 # Select position of solid-liquid interface (z = 0).
 # a) for Water Peak
 # b) for GDS
 # c) for SAM Peak
-# d) for Middle Point 
-option= 'b'
+# d) for Middle Point
+# e) for highest carbon in SAM
 
+option= 'e'
 if option == 'a':
     interface='WaterPeaks'
 elif option == 'b':
@@ -75,14 +80,16 @@ elif option == 'b':
 elif option == 'c':
     interface='SAMPeaks'
 elif option == 'd':
-    interface='MiddlePoint' 
+    interface='MiddlePoint'
+elif option == 'e':
+    interface='SAM_last_C_atom' 
 
 # File with interface positions:
 file_pos_interface = peaksfolder + interface + '.txt'
 
 # systems that appear in file with interface positions:
-SAMpeaks=[0,5,11,17,33]
-Waterpeaks=[1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
+SAMpeaks=[0,5,11,17,21,25,33,41,50,66]
+Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
             
 #Read file with interface positions.
 interface_data= np.loadtxt(file_pos_interface, skiprows=1)
@@ -104,7 +111,7 @@ for pc in SAMs:
 
     txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'s'+str(pc)+'.txt'
     txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'.txt'
-    plotsOutput = outputfolder + interface + 'Circle_plots_all_s'+str(pc)+'.pdf'
+    plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'.pdf'
 
     with PdfPages(plotsOutput) as pp, open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
 
@@ -120,13 +127,14 @@ for pc in SAMs:
         # "myinput" and radial coordinate in variable "x".
         
         for molecs in Waters:
+            os.chdir(densfolder + 's'+str(pc) + str(molecs))
             print >> myfile, '             '
             print >> myfile2, '{0}  {1} {2}'.format('#File:', pc, molecs)
             
             for start in C_AnglesModule.frange(
             start_time, end_time, timestep):
                 
-                # Set file name.
+                # Set input file name.
                 end = start + timestep
                 filename = 'g_rad_dmap_%dpc_w%d_%sns_%sns.xvg'%(
                 pc, molecs, str(start), str(end), )
