@@ -193,8 +193,8 @@ def from_slice_circle(slicemax, slicemin, zcoord, cyl_radius):
     """
     dims = slicemax - slicemin + 1
     
-    if dims<0:
-        return
+    if dims<=1 or (dims is None):
+        return float('nan'), 0.0, float('nan'), [float('nan')], [float('nan')]
         
     else:
         i=0

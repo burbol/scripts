@@ -31,24 +31,26 @@ Oliver Beckstein, http://github.com/orbeckst/GromacsWrapper
 import C_AnglesModule
 import numpy as np
 import os
-import pylab as pl
+import math
 from matplotlib.backends.backend_pdf import PdfPages
 import gromacs
 gromacs.config.setup()
 from gromacs.formats import XVG
 
-#densfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
+#parentfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
 #peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
 #outputfolder = "/Users/burbol2/Desktop/"
 
-densfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
-peaksfolder = densfolder
-outputfolder = densfolder
+#parentfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
+parentfolder = "/Volumes/UNI/Densmaps_NewVersion4/"
+peaksfolder = parentfolder
+outputfolder = parentfolder
 
 # Systems to analyze:
 
 #SAM percentage of -OH coverage (polarity)
-SAMs=[5, 21, 27, 41] 
+SAMs=[25]
+#Waters=[3000]
 
 #Number of water molecules in the droplet
 Waters=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
@@ -82,14 +84,16 @@ elif option == 'c':
 elif option == 'd':
     interface='MiddlePoint'
 elif option == 'e':
-    interface='SAM_last_C_atom' 
+    interface='SAM_last_C_atom'
 
 # File with interface positions:
 file_pos_interface = peaksfolder + interface + '.txt'
 
 # systems that appear in file with interface positions:
-SAMpeaks=[0,5,11,17,21,25,33,41,50,66]
-Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
+SAMpeaks = [5,21,25,41]
+Waterpeaks = Waters
+#SAMpeaks=[0,5,11,17,21,25,33,41,50,66]
+#Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
             
 #Read file with interface positions.
 interface_data= np.loadtxt(file_pos_interface, skiprows=1)
@@ -106,15 +110,19 @@ for pc in SAMpeaks:
         i = i + 1
 
 
-os.chdir(densfolder)
+os.chdir(parentfolder)
 for pc in SAMs:
 
     txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'s'+str(pc)+'.txt'
     txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'.txt'
     plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'.pdf'
 
-    with PdfPages(plotsOutput) as pp, open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
-
+    #with PdfPages(plotsOutput) as pp, open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
+    # the former line was changed for the next two because of "AttributeError: __exit__" when using 
+    # PdfPages with a with-statement, probably due to an older python version on the server
+    with open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
+        pp = PdfPages(plotsOutput)
+        
         # Write titles for the 3 columns of data
         
         print >> myfile, '{0}  {1}  {2}'.format(
@@ -127,7 +135,14 @@ for pc in SAMs:
         # "myinput" and radial coordinate in variable "x".
         
         for molecs in Waters:
-            os.chdir(densfolder + 's'+str(pc) + str(molecs))
+        
+            simulation_folder = parentfolder + 's'+str(pc) + '_w' + str(molecs)
+            
+            # If simulation folder doesn't exist jump to the next time step
+            if not os.path.isdir(simulation_folder):
+                continue
+                
+            os.chdir(simulation_folder)
             print >> myfile, '             '
             print >> myfile2, '{0}  {1} {2}'.format('#File:', pc, molecs)
             
@@ -141,15 +156,14 @@ for pc in SAMs:
                 
             
                 # If file doesn't exist print "nan" and jump to the 
-                # next time step.s
+                # next time step
                 
                 if not os.path.isfile(filename): 
                    print >> myfile, '{0}  {1}   {2}'.format(
                    filename, 'nan', 'nan')
                    print >> myfile2, '{0}   {1}'.format('nan', 'nan')
-                   continue 
-               
-               
+                   continue
+                                  
                 # Read density files and save in multidimensional 
                 # array (matrix). The first element of array (first 
                 # column of matrix) are the z-coordinates.
@@ -239,17 +253,18 @@ for pc in SAMs:
                 if slicemin < zeroslice :
                     slicemin = zeroslice 
                 
+                               
+                if ((slicemin==None) and (slicemax==None)) or (slicemin >= slicemax - 1):
+                    print >> myfile, '{0}  {1}  {2}'.format(
+                    filename,'nan', 'nan')
+                    print >> myfile2, '{0}  {1}'.format('nan', 'nan')
+                    print "ERROR 2"
+                    continue
                 
                 # Boundaries for fit:
                 
                 slicemin, slicemax = C_AnglesModule.find_best_slices(
-                slicemax, slicemin, zcoord, R)
-                
-                if (slicemin==None) and (slicemax==None):
-                    print >> myfile, '{0}  {1}  {2}'.format(
-                    filename,'nan', 'nan')
-                    print >> myfile2, '{0}  {1}'.format('nan', 'nan')
-                    
+                slicemax, slicemin, zcoord, R)                   
         
                 #Leave slices below zero out.
                 
@@ -258,11 +273,17 @@ for pc in SAMs:
                 
                 
                 # Make the circle fit again.
-                
                 xc, yc, Rc, z_circle, R_circle  = \
                     C_AnglesModule.from_slice_circle(
                     slicemax, slicemin,zcoord, R)
-        
+                    
+                    
+                if math.isnan(xc) or math.isnan(Rc):
+                    print >> myfile, '{0}  {1}  {2}'.format(
+                    filename,'nan', 'nan')
+                    print >> myfile2, '{0}  {1}'.format('nan', 'nan')
+                    print "ERROR 3"
+                    continue
     
                 # Final results: 
 
@@ -295,4 +316,5 @@ for pc in SAMs:
                 pp.savefig(circle_fit_plot)
                 
                 
-                pl.close()
+                #pp.close()
+    pp.close()
