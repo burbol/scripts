@@ -15,8 +15,9 @@ Output:
         radius in two columns. One of them has a third column
         with the name of the input file. Each line corresponds
         to one input file).
-        -- One file with format ".pdf" (circle fit plots. Each 
+        -- One file with format ".pdf" (with circle fit plots. Each 
         page corresponds to one input file).
+        
         Dependencies: C_AnglesModule.py, gromacs wrapper, scipy
         
 (g_rad_density is a modification of the GROMACS program g_densmap
@@ -28,6 +29,7 @@ It uses the self-developed module C_AnglesModule.py
 Also the module GromacsWrapper from:
 Oliver Beckstein, http://github.com/orbeckst/GromacsWrapper
 '''
+
 import C_AnglesModule
 import numpy as np
 import os
@@ -37,33 +39,41 @@ import gromacs
 gromacs.config.setup()
 from gromacs.formats import XVG
 
+
+# Define folder names: "parentfolder" is the parent folder of the
+# density profiles folders, "peaksfolder" stores the .txt files with
+# the interface positions, and "outputfolder" the output files
+
 #parentfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
 #peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
-#outputfolder = "/Users/burbol2/Desktop/"
 
 #parentfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
 parentfolder = "/Volumes/UNI/Densmaps_NewVersion4/"
 peaksfolder = parentfolder
 outputfolder = parentfolder
 
-# Systems to analyze:
 
-#SAM percentage of -OH coverage (polarity)
-SAMs=[25]
-#Waters=[3000]
+# SYSTEMS TO ANALYZE
 
-#Number of water molecules in the droplet
+# Percentage of -OH coverage (polarity) of the SAMs 
+
+SAMs=[5, 21, 25, 41]
+
+#Number of water molecules in the droplets
+
 Waters=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
 
 
-#Length of longest interval analysed. 
-#For shorter simulations 'nan' is returned.
+# Length of longest interval analyzed. In the shorter simulations
+# 'NaN' will be returned for each time step that does not exist
+
 start_time = 0
 end_time = 100
 timestep = 0.5
 
 
 # Simulation box length in the z-direction:
+
 boxlength={5: 20.0, 21: 20.0, 25: 20.0, 41: 20.0}
 
 
@@ -85,22 +95,29 @@ elif option == 'd':
     interface='MiddlePoint'
 elif option == 'e':
     interface='SAM_last_C_atom'
+    
 
 # File with interface positions:
+
 file_pos_interface = peaksfolder + interface + '.txt'
 
-# systems that appear in file with interface positions:
+
+# Systems that appear in file with interface positions:
+
 SAMpeaks = [5,21,25,41]
-Waterpeaks = Waters
 #SAMpeaks=[0,5,11,17,21,25,33,41,50,66]
-#Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
+Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
+
             
-#Read file with interface positions.
+# Store interface positions in array "interface_data"
+
 interface_data= np.loadtxt(file_pos_interface, skiprows=1)
 
-# Save interface position of each system in dictionary for easier
-# access. The keys are the polarity and molecule number of the system.
-# For example: interface_pos[(11, 1000)]
+
+# Store interface position of each system in dictionary for easier
+# access. The keys are the OH percentage (polarity) and number of
+# molecules of the system. For example: interface_pos[(11, 1000)]
+
 i = 0
 interface_pos={}
 for pc in SAMpeaks:
@@ -111,19 +128,38 @@ for pc in SAMpeaks:
 
 
 os.chdir(parentfolder)
+
+
+# Loop through files corresponding to SAMs with different 
+# OH-coverage percentage 
+
 for pc in SAMs:
 
-    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'s'+str(pc)+'.txt'
+    # Define names of output files: 
+    
+    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'.txt'
     txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'.txt'
     plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'.pdf'
 
-    #with PdfPages(plotsOutput) as pp, open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
-    # the former line was changed for the next two because of "AttributeError: __exit__" when using 
-    # PdfPages with a with-statement, probably due to an older python version on the server
-    with open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
-        pp = PdfPages(plotsOutput)
+
+    # Create (open) output files: 
+    # "myfile" and "myfile2" are .txt files where the contact angle
+    # and radius at every time step will be printed in two columns
+    # (in each line).
+    # "myfile" has an additional column with the name of the 
+    # corresponding density file (one file for every time step) and
+    # before each bloc of results the name of the system is printed.
+    # "myfile2" separates the blocs of results with one empty line.
+    # "plotsOutput" is a .pdf file with one plot per page. The plots 
+    # show both the data points used in the fit and the resulting
+    # fitted circle for each time step.
+    
+    
+    with PdfPages(plotsOutput) as pp, open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
+    #with open(txtoutput, 'w') as myfile, open(txtoutput2, 'w') as myfile2:
+        #pp = PdfPages(plotsOutput)
         
-        # Write titles for the 3 columns of data
+        # Print titles for the 3 columns of data
         
         print >> myfile, '{0}  {1}  {2}'.format(
         'File', 'Contact Angle', 'Base Radius')
@@ -131,64 +167,94 @@ for pc in SAMs:
         'Contact Angle', 'Base Radius')
         
         
-        # Loop through input files and save in density in variable
-        # "myinput" and radial coordinate in variable "x".
-        
+        # Loop through files corresponding to water droplets with
+        # different number molecules
         for molecs in Waters:
         
+            # Define name of folder where density profiles are stored
+            # (using SAM's polarity and number of water molecules. For
+            # example s25_w2000)
             simulation_folder = parentfolder + 's'+str(pc) + '_w' + str(molecs)
-            
-            # If simulation folder doesn't exist jump to the next time step
-            if not os.path.isdir(simulation_folder):
-                continue
                 
             os.chdir(simulation_folder)
+            
+            
+            # Separate new bloc of results with empty line (in 
+            # "myfile") or system name (in "myfile2")
             print >> myfile, '             '
             print >> myfile2, '{0}  {1} {2}'.format('#File:', pc, molecs)
+            
+            
+            # If simulation folder doesn't exist print "NaN" for all 
+            # time steps and jump to the next simulation 
+            if not os.path.isdir(simulation_folder):
+                            
+                for start in C_AnglesModule.frange(
+                start_time, end_time, timestep):
+                
+                    print >> myfile, '{0}  {1}  {2}'.format(
+                    filename,'NaN', 'NaN')
+                    print >> myfile2, '{0}  {1}'.format('NaN', 'NaN')
+                    
+                continue
+                print "ERROR 2: folder not found for s",pc," w",molecs
+            
+            # Start loop over all time steps
             
             for start in C_AnglesModule.frange(
             start_time, end_time, timestep):
                 
-                # Set input file name.
+                # Set input file name
+                
                 end = start + timestep
                 filename = 'g_rad_dmap_%dpc_w%d_%sns_%sns.xvg'%(
                 pc, molecs, str(start), str(end), )
                 
             
-                # If file doesn't exist print "nan" and jump to the 
-                # next time step
+                # If density file doesn't exist for this time step print 
+                # "NaN" and jump to the next time step
                 
                 if not os.path.isfile(filename): 
                    print >> myfile, '{0}  {1}   {2}'.format(
-                   filename, 'nan', 'nan')
-                   print >> myfile2, '{0}   {1}'.format('nan', 'nan')
+                   filename, 'NaN', 'NaN')
+                   print >> myfile2, '{0}   {1}'.format('NaN', 'NaN')
                    continue
                                   
-                # Read density files and save in multidimensional 
-                # array (matrix). The first element of array (first 
-                # column of matrix) are the z-coordinates.
+                # Read density files and store in ndarray "myinput" (multidimensional 
+                # array or matrix). The first element of "myinput" (first 
+                # column of matrix) is stored in array "x" and corresponds
+                # to the z-coordinates of the radial density profiles.
+                # (x[i] is the z-coordinate of density profile myinput[i])
                 
                 xvg = XVG()   
                 xvg.read(filename)
                 myinput = xvg.array
                 x = myinput[0] 
                 
-                
-                # Create array "zcoord" subtracting the position of 
-                # the solid-liquid interface (shift) from z-coordinates.
-                
-                slicestotal = len(myinput) - 1
-                sliceheight = boxlength[pc]/ slicestotal
-                zcoord = np.zeros(len(myinput)-1)
-                
+                # Store interface position in float "shift"
                 shift = interface_pos[(pc, molecs)]
                 
+                # Store total number of slices in integer "slicestotal"
+                slicestotal = len(myinput) - 1
+                
+                # Store height of slices in float "sliceheight"
+                sliceheight = boxlength[pc]/ slicestotal
+                        
+                
+                # Shift coordinate system in the z-direction to set
+                # origin at interface position. Store new coordinates
+                # in array "zcoord"
+                
+                zcoord = np.zeros(len(myinput)-1)
+                       
                 for i in range(1,len(myinput)): 
                     zcoord[i-1] = (sliceheight *(i-1))-shift
+                print "first coordinates of zcoord", zcoord[0], zcoord[1], zcoord[2], zcoord[-1]
         
         
-                # Set slice with zcoord = 0.0 as "zeroslice". Needed
-                # to discard first 8 nm above the surface from fit.
+                # Store slice number i with zcoord[i] = 0.0 in integer
+                # "zeroslice". (Needed to discard first 8 nm above 
+                # the surface from fit)
                 
                 zeroslice = 0
                 cnt = 0
@@ -198,17 +264,18 @@ for pc in SAMs:
                        break
                     cnt = cnt + 1
                 
-                # Arrays with arameters of sigmoid fit for all slices:
+                # Store parameters of sigmoidal fit in arrays "r0", "R", "d"
                 
                 r0, R, d = C_AnglesModule.sigmoidfit(myinput)
                 
                 
-                # Bulk density.
+                # Store bulk density in float "bulk"
                 
                 bulk = C_AnglesModule.waterbulk(myinput, r0, R, d )
                 
                 
-                # Fiirst estimate of last slice "good" for fit.
+                # Store first estimate of last "good slice" for
+                # circle fit in integer "slicemax"
                 
                 slicemax = 0
                 for slice in range(slicestotal,0,-1):
@@ -220,9 +287,12 @@ for pc in SAMs:
                         break
                     else:
                         continue
+                print "first estimate of slicemax = ", slicemax
+                print "zcoord[slicemax]= ", zcoord[slicemax]
                         
                         
-                # First estimate of first slice "good" for fit (slicemin).
+                # Store first estimate of first "good slice" for
+                # circle fit in integer "slicemin"
                 
                 slicemin = 0
                 middleslice = int(0.75*slicestotal)
@@ -234,18 +304,20 @@ for pc in SAMs:
                         slicemin = slice
                         break
                     else: 
-                        continue 
+                        continue
+                print "first estimate of slicemin = ", slicemin
+                print "zcoord[slicemin]= ", zcoord[slicemin]
                         
   
                 # Shift "slicemin" if too close to surface.
                 # 0.8nm above "zeroslice" (if needed).
                 
-                discard = 0.8 # use nm!
-                slices_out =  int(discard/sliceheight)
-                slicemin2 = zeroslice + 13
-                
-                if slicemin < slicemin2:
-                    slicemin = slicemin2
+#                 discard = 0.8 # use nm!
+#                 slices_out =  int(discard/sliceheight)
+#                 slicemin2 = zeroslice + 13
+#                 
+#                 if slicemin < slicemin2:
+#                     slicemin = slicemin2
 
         
                 #Leave slices below zero out (if needed).
@@ -256,9 +328,9 @@ for pc in SAMs:
                                
                 if ((slicemin==None) and (slicemax==None)) or (slicemin >= slicemax - 1):
                     print >> myfile, '{0}  {1}  {2}'.format(
-                    filename,'nan', 'nan')
-                    print >> myfile2, '{0}  {1}'.format('nan', 'nan')
-                    print "ERROR 2"
+                    filename,'NaN', 'NaN')
+                    print >> myfile2, '{0}  {1}'.format('NaN', 'NaN')
+                    print "ERROR: no good slices found for s",pc," w",molecs," at ",start," ns"
                     continue
                 
                 # Boundaries for fit:
@@ -276,14 +348,15 @@ for pc in SAMs:
                 xc, yc, Rc, z_circle, R_circle  = \
                     C_AnglesModule.from_slice_circle(
                     slicemax, slicemin,zcoord, R)
+                print "xc=",xc,", Rc =", Rc
                     
                     
-                if math.isnan(xc) or math.isnan(Rc):
-                    print >> myfile, '{0}  {1}  {2}'.format(
-                    filename,'nan', 'nan')
-                    print >> myfile2, '{0}  {1}'.format('nan', 'nan')
-                    print "ERROR 3"
-                    continue
+#                 if math.isNaN(xc) or math.isNaN(Rc) or ((slicemin==None) and (slicemax==None)) or (slicemin >= slicemax - 1):
+#                     print >> myfile, '{0}  {1}  {2}'.format(
+#                     filename,'NaN', 'NaN')
+#                     print >> myfile2, '{0}  {1}'.format('NaN', 'NaN')
+#                     print "ERROR 3: good slices lost. CHECK!"
+#                     continue
     
                 # Final results: 
 
@@ -293,12 +366,12 @@ for pc in SAMs:
                 
                 # Print results on screen.
                 print "File analyzed ", filename
-                print "Slices used: zero slice=",  zeroslice, 
-                "min=",  slicemin, "max=",  slicemax
+                print "Slices used: zero=",  zeroslice, \
+                ", min=",  slicemin, ", max=",  slicemax
                 print "\n Results: theta=", theta, "base_r=", base_r
         
         
-                # Save results in output files.
+                # Store results in output files.
                 
                 print >> myfile, '{0}  {1}  {2}'.format(
                 filename, theta, base_r)
@@ -311,10 +384,9 @@ for pc in SAMs:
                 z_circle, R_circle, xc, yc, Rc, filename)
                 
                 
-                #Save one plot per page.
+                #Store one plot per page.
                 
                 pp.savefig(circle_fit_plot)
                 
                 
-                #pp.close()
-    pp.close()
+    #pp.close()

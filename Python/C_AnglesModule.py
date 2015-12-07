@@ -39,6 +39,9 @@ def sigmoid_guess(y):
     
     Returns:
     sig_guess(float): Initial parameter estimate.
+    
+    The output is the mean of the density values that are at least 
+    two thirds of the maximum density. 
     """
     m = max(y)
     m2 = min(y)
@@ -60,12 +63,12 @@ def sigmoid_func(r, ro, R, d):
 def sigmoidfit(input):
     """Make sigmoidal fit of density profiles at every z-coordinate.
     
-    The function sigmoid_func is fitted to density profiles 
-    with different z-coordinate. 
+    The input function (sigmoid_func) is fitted to the density profiles of all z-coordinates
+    (to each z-coordinate or "slice" corresponds one radial density profile).
     
     Args:
     input(ndarray): input[0] stores array with z-coordinates . The 
-                            remaining elements are radial density profiles for
+                            remaining elements (arrays) are radial density profiles for
                             the different z-coordinates (array of arrays).
 
     Returns:
@@ -73,19 +76,45 @@ def sigmoidfit(input):
     R_sigmoid(array): Parameter from sigmoidal fit (cylindrical radius).
     d_sigmoid(array): Parameter from sigmoidal fit.
     
+    The output parameters are arrays because there is one fitted parameter for each 
+    z-coordinate (one radial density profile of each horizontal "slice").
+     
     "maxfev" is a parameter of scipy.optimize.curve_fit. It is the 
     allowed number of funtion calls when doing the 
-    fit. Default is too low (maxfev=800).
+    fit. Default (maxfev=800) is too low.
     """
-    z = input[0] # z-coordinates
+    # Save z-coordinates in array "z"
+    
+    z = input[0] 
+    
+    
+    # Save total number of "slices" in integer "slicestotal"
+    # (one corresponding to each z-coordinate)
+    
     slicestotal = len(input)
+    
+        
+    #Create empty arrays to store output
+    
     ro_sigmoid = np.zeros(slicestotal)
     R_sigmoid = np.zeros(slicestotal)
     d_sigmoid = np.zeros(slicestotal)
+
+    
+    # Loop through all z-coordinates ("slices")
     
     for i in range(0,slicestotal):
-        slicedens = input[i]
+    
+        # Save in array "slicedens" the radial density profile of 
+        # the "ith-slice"
+        slicedens = input[i]  
+        
+        # Save inital guess of the fitting parameters in the float "fit_guess"
+        
         fit_guess = sigmoid_guess(slicedens)
+        
+        # Fit sigmoidal function to radial density profile.
+        # Then save each parameter from the fit in a separate array (in the ith position)
         popt, pcov = curve_fit(sigmoid_func, z, slicedens,[fit_guess, 2, 1], maxfev=10000)
         ro_sigmoid[i], R_sigmoid[i], d_sigmoid[i] = popt
     return ro_sigmoid, R_sigmoid, d_sigmoid
@@ -257,8 +286,8 @@ def distance(x, y, xc, yc,R):
 def find_best_slices(slicemax, slicemin, zcoord, cyl_radius):
     """Find "best" slices for circle fit.
 
-    Fit circle to cylindrical radius of the slices between "slicemin"
-    and "slicemax". Find maximum number of "good" slices: where
+    Fit circle to cylindrical radius of each droplet slice between "slicemin"
+    and "slicemax". Find maximum number of "good slices": where
     distance of "slicemin" to circle is smaller than epsilon, 
     and "slicemax" to circle smaller than epsilon2.
     
