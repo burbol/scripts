@@ -25,10 +25,10 @@ n=4
 #mkdir ./global_density_maps
 #mkdir ./g_rad_densmaps_next
 
-for i in 25 # OH density of the SAM 
+for i in 41 # OH density of the SAM 
 #for i in 5 21 25 41 # OH density of the SAM 
 do
-  for j in 9000
+  for j in 8000
   #for j in 3000 4000 5000 6500 7000 8000 9000
   #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
   do
@@ -105,8 +105,8 @@ do
     while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
     do    
         k2=$((k+5))
-        nanosecs1=$(echo $(round $k/10+425 1))
-        nanosecs2=$(echo $(round $k2/10+425 1))
+        nanosecs1=$(echo $(round $k/10 1))
+        nanosecs2=$(echo $(round $k2/10 1))
         start=$((k*100))
         ending=$((start+500))
 

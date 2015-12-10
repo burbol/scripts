@@ -61,7 +61,8 @@ SAMs=[5, 21, 25, 41]
 
 #Number of water molecules in the droplets
 
-Waters=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
+#Waters=[4000]
+Waters=[2000, 3000, 4000, 5000, 6500, 8000, 9000]
 
 
 # Length of longest interval analyzed. In the shorter simulations
@@ -84,7 +85,7 @@ boxlength={5: 20.0, 21: 20.0, 25: 20.0, 41: 20.0}
 # d) for Middle Point
 # e) for highest carbon in SAM
 
-option= 'e'
+option= 'a'
 if option == 'a':
     interface='WaterPeaks'
 elif option == 'b':
@@ -137,9 +138,9 @@ for pc in SAMs:
 
     # Define names of output files: 
     
-    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'.txt'
-    txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'.txt'
-    plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'.pdf'
+    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'D.txt'
+    txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'D.txt'
+    plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'D.pdf'
 
 
     # Create (open) output files: 

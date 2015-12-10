@@ -6,9 +6,10 @@
 #cd /Users/burbol/Desktop/scripts/Python/SCRIPT_CREATION/scheldon-ng/
 #cd /Users/burbol/MEGAsync/scripts/Python/SCRIPT_CREATION/scheldon/
 
-for i in 5 21 25 41 # OH density of the SAM 
+for i in 25 # OH density of the SAM 
 do
-	for j in 2000 3000 4000 5000 6500 7000 8000 9000  # number of water molecules
+	#for j in 2000 3000 4000 5000 6500 7000 8000 9000  # number of water molecules
+	for j in 4000
 	#for j in 6500 7000 8000 9000 10000   # cuda
 	#for j in 216 1000 4000 3000 4000 5000 # sheldon-ng
   do 

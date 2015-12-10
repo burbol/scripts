@@ -115,7 +115,7 @@ def sigmoidfit(input):
         
         # Fit sigmoidal function to radial density profile.
         # Then save each parameter from the fit in a separate array (in the ith position)
-        popt, pcov = curve_fit(sigmoid_func, z, slicedens,[fit_guess, 2, 1], maxfev=10000)
+        popt, pcov = curve_fit(sigmoid_func, z, slicedens,[fit_guess, 2, 1], maxfev=100000)
         ro_sigmoid[i], R_sigmoid[i], d_sigmoid[i] = popt
     return ro_sigmoid, R_sigmoid, d_sigmoid
 
