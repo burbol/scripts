@@ -1,0 +1,962 @@
+Last login: Wed Aug  6 06:55:15 on ttys006
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@bert.physik.fu-berlin.de
+eixeres@bert.physik.fu-berlin.de's password: 
+Permission denied, please try again.
+eixeres@bert.physik.fu-berlin.de's password: 
+^C
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@zedat.fu-berlin.de
+ssh: connect to host zedat.fu-berlin.de port 22: Operation timed out
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@login.zedat.fu-berlin.de
+eixeres@login.zedat.fu-berlin.de's password: 
+Last login: Thu Jul 17 23:44:59 2014 from 92.225.113.237
+[eixeres@login] 26 (~): pwd
+/home/e/eixeres
+[eixeres@login] 27 (~): ls
+public_html/ 
+[eixeres@login] 28 (~): exit
+logout
+Connection to login.zedat.fu-berlin.de closed.
+Lailas-MacBook:JobScripts burbol$ 
+  [Restored]
+Last login: Wed Aug  6 12:00:16 on ttys000
+Lailas-MacBook:JobScripts burbol$ 
+  [Restored]
+Last login: Wed Aug  6 12:00:39 on ttys006
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@zedat.fu-berlin.de
+^C
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@soroban.fu-berlin.de
+ssh: Could not resolve hostname soroban.fu-berlin.de: nodename nor servname provided, or not known
+Lailas-MacBook:JobScripts burbol$ ssh eixeres@soroban.zedat.fu-berlin.de
+eixeres@soroban.zedat.fu-berlin.de's password: 
+-------------------------------------------------------------------------------
+
+                                __ __  __  __  __  _       
+                    WELCOME TO (  /  )/__)/  )/__)/_| /| ) 
+                              __)(__// ( (__//__)(  |/ |/  
+      
+
+-------------------------------------------------------------------------------
+EWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEW
+-------------------------------------------------------------------------------
+
+
+07.05.2014: IMPORTANT! Publications
+===================================
+
+  If computing time on Soroban has contributed to a publication or the
+  completion of a degree course, please send us a corresponding link
+  and, if possible, an appropriate graphic.  This is the ONLY way we can
+  document the usefulness of our service.
+
+  The full list of publications is available here:
+
+  [http://www.zedat.fu-berlin.de/Compute/EN/ResearchResults]
+
+
+14.05.2014: Information for MATLAB Users
+========================================
+
+  It is now necessary to specify how many MATLAB licenses a job needs.
+  This can be done in a batch script via
+
+  #SBATCH --licenses=matlab
+
+  If required, multiple licenses may be requested by following the
+  license name with an asterisk and the count, e.g.
+
+  #SBATCH --licenses=matlab*2
+
+  Please note that 5 Matlab licenses are currently available.
+
+
+-------------------------------------------------------------------------------
+S * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS * NEWS 
+-------------------------------------------------------------------------------
+
+Last login: Thu Jul 24 07:43:24 2014 from z55bc.pia.fu-berlin.de
+
+Use the following commands to adjust your environment:
+
+'module avail'            - show available modules
+'module add <module>'     - adds a module to your environment for this session
+'module initadd <module>' - configure module to be loaded at every login
+
+-------------------------------------------------------------------------------
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = (unset)
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+-bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+
+More information about how to schedule batch jobs can be found here:
+http://www.zedat.fu-berlin.de/HPC/EN/SorobanQueueingSystem
+
+[eixeres@soroban ~]$ pwd
+/home/eixeres
+[eixeres@soroban ~]$ cd /scratch
+[eixeres@soroban scratch]$ cd eixeres/
+[eixeres@soroban eixeres]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban eixeres]$ cd s0_w216/
+[eixeres@soroban s0_w216]$ ls
+#confout.gro.1#         NPT_water216.gro            sam0_water216.gro
+#ener.edr.1#            NPT_water216_shift.gro      sam0_water216.top
+#ener.edr.2#            NVT.mdp                     sam0_water216_continue1
+#md.log.1#              NVT_sam0_water216.cpt       sam0_water216_continue2
+#md.log.2#              NVT_sam0_water216.edr       sam0_water216_continue3
+#md.log.3#              NVT_sam0_water216.gro       sam0_water216_continue4
+#traj.trr.1#            NVT_sam0_water216.log       sam0_water216_continue5
+#traj.trr.2#            NVT_sam0_water216.tpr       sam0_water216_continue6
+#traj.xtc.1#            NVT_sam0_water216.trr       sam0_water216_continue7
+#traj.xtc.2#            NVT_sam0_water216.xtc       sam0_water216_continue8
+CH3.itp                 NVT_sam0_water216_prev.cpt  sam0_water216_continue9
+CH3_long.itp            OH.itp                      slurm-492610.out
+Mini.mdp                T1.itp                      slurm-492611.out
+Mini_sam0_water216.edr  confout.gro                 start0.gro
+Mini_sam0_water216.gro  ener.edr                    state.cpt
+Mini_sam0_water216.log  md.log                      topol.top
+Mini_sam0_water216.tpr  mdout.mdp                   traj.trr
+Mini_sam0_water216.trr  sam0_water216               traj.xtc
+[eixeres@soroban s0_w216]$ cd ..
+[eixeres@soroban eixeres]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban eixeres]$ cp -r s*_w216 /home/eixeres/simulations/finished/
+[eixeres@soroban eixeres]$ cd /home/eixeres/simulations/finished/
+[eixeres@soroban finished]$ ls
+-bash: l?s: command not found
+[eixeres@soroban finished]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban finished]$ scp -r s*_w216 eixeres@sheldon-ng.physik.fu-berlin.de:/home/eixeres/simulations/water216 
+eixeres@sheldon-ng.physik.fu-berlin.de's password: 
+traj.xtc                                      100%    0     0.0KB/s   00:00    
+state.cpt                                     100% 1412KB   1.4MB/s   00:00    
+#ener.edr.1#                                  100% 1792     1.8KB/s   00:00    
+#traj.trr.2#                                  100% 1410KB   1.4MB/s   00:00    
+NVT_sam0_water216_prev.cpt                    100% 1412KB   1.4MB/s   00:00    
+sam0_water216_continue2                       100% 1124     1.1KB/s   00:00    
+NPT_water216_shift.gro                        100%   44KB  43.7KB/s   00:00    
+ener.edr                                      100% 1240     1.2KB/s   00:00    
+NVT_sam0_water216.gro                         100% 4054KB   4.0MB/s   00:00    
+CH3_long.itp                                  100% 4828     4.7KB/s   00:00    
+slurm-492610.out                              100% 6712     6.6KB/s   00:00    
+start0.gro                                    100% 4011KB   3.9MB/s   00:01    
+mdout.mdp                                     100%   10KB  10.2KB/s   00:00    
+sam0_water216.gro                             100% 4054KB   4.0MB/s   00:00    
+NVT_sam0_water216.cpt                         100% 1412KB   1.4MB/s   00:00    
+NVT_sam0_water216.xtc                         100%  293MB  58.7MB/s   00:05    
+#md.log.3#                                    100%   16KB  16.1KB/s   00:00    
+Mini_sam0_water216.gro                        100% 2644KB   2.6MB/s   00:00    
+sam0_water216_continue4                       100% 1111     1.1KB/s   00:00    
+NVT_sam0_water216.log                         100%   28KB  28.3KB/s   00:00    
+topol.top                                     100%  425     0.4KB/s   00:00    
+traj.trr                                      100% 1410KB   1.4MB/s   00:00    
+md.log                                        100%   16KB  16.1KB/s   00:00    
+sam0_water216_continue9                       100% 1113     1.1KB/s   00:00    
+OH.itp                                        100% 4683     4.6KB/s   00:00    
+sam0_water216.top                             100%  636     0.6KB/s   00:00    
+#traj.trr.1#                                  100% 1410KB   1.4MB/s   00:00    
+sam0_water216_continue1                       100% 1123     1.1KB/s   00:00    
+sam0_water216_continue5                       100% 1132     1.1KB/s   00:00    
+sam0_water216                                 100% 1428     1.4KB/s   00:00    
+T1.itp                                        100%  147     0.1KB/s   00:00    
+Mini_sam0_water216.trr                        100%  705KB 705.2KB/s   00:00    
+slurm-492611.out                              100% 6688     6.5KB/s   00:00    
+Mini.mdp                                      100%  849     0.8KB/s   00:00    
+NVT_sam0_water216.tpr                         100% 2123KB   2.1MB/s   00:00    
+#traj.xtc.2#                                  100%    0     0.0KB/s   00:00    
+Mini_sam0_water216.edr                        100% 1280     1.3KB/s   00:00    
+Mini_sam0_water216.log                        100%   14KB  13.8KB/s   00:00    
+CH3.itp                                       100% 4612     4.5KB/s   00:00    
+#md.log.1#                                    100%   17KB  16.9KB/s   00:00    
+#traj.xtc.1#                                  100%  225KB 224.9KB/s   00:00    
+#confout.gro.1#                               100% 4054KB   4.0MB/s   00:01    
+NVT.mdp                                       100%  926     0.9KB/s   00:00    
+#ener.edr.2#                                  100% 1240     1.2KB/s   00:00    
+NVT_sam0_water216.edr                         100% 1792     1.8KB/s   00:00    
+sam0_water216_continue3                       100% 1128     1.1KB/s   00:00    
+#md.log.2#                                    100% 2958     2.9KB/s   00:00    
+NPT_water216.gro                              100%   44KB  43.7KB/s   00:00    
+NVT_sam0_water216.trr                         100% 2821KB   2.8MB/s   00:00    
+sam0_water216_continue6                       100% 1111     1.1KB/s   00:00    
+Mini_sam0_water216.tpr                        100% 1888KB   1.8MB/s   00:00    
+sam0_water216_continue7                       100% 1111     1.1KB/s   00:00    
+sam0_water216_continue8                       100% 1111     1.1KB/s   00:00    
+confout.gro                                   100% 4054KB   4.0MB/s   00:00    
+perf.out                                      100%    0     0.0KB/s   00:00    
+Mini_sam11_water216.edr                       100% 1280     1.3KB/s   00:00    
+#mdout.mdp.4#                                 100%   10KB  10.2KB/s   00:00    
+NVT_sam11_water216.edr                        100% 1792     1.8KB/s   00:00    
+md.log                                        100%   18KB  18.3KB/s   00:00    
+sam11_water216_continue1                      100% 1135     1.1KB/s   00:00    
+Mini_sam11_water216.gro                       100% 2796KB   2.7MB/s   00:00    
+confout.gro                                   100% 4286KB   4.2MB/s   00:00    
+#NVT_sam11_water216.xtc.1#                    100%  955KB 954.6KB/s   00:00    
+#confout.gro.1#                               100% 4286KB   4.2MB/s   00:00    
+#Mini_sam11_water216.tpr.1#                   100% 2004KB   2.0MB/s   00:00    
+traj.trr                                      100% 1491KB   1.5MB/s   00:00    
+NPT_water216.gro                              100%   44KB  43.7KB/s   00:00    
+#benchtest.log.2#                             100%   10KB  10.4KB/s   00:00    
+#mdout.mdp.3#                                 100%   10KB  10.2KB/s   00:00    
+slurm-491796.out                              100%  116KB 116.4KB/s   00:00    
+state_prev.cpt                                100% 1493KB   1.5MB/s   00:00    
+sam11_water216_continue7                      100% 1041     1.0KB/s   00:00    
+sam11_water216_continue3                      100% 1041     1.0KB/s   00:00    
+delete.gro                                    100% 2767KB   2.7MB/s   00:00    
+#NVT_sam11_water216.tpr.1#                    100% 2252KB   2.2MB/s   00:00    
+NVT_sam11_water216.cpt                        100% 1493KB   1.5MB/s   00:00    
+#Mini_sam11_water216.gro.1#                   100% 2796KB   2.7MB/s   00:00    
+slurm-492778.out                              100% 6634     6.5KB/s   00:00    
+#Mini_sam11_water216.log.1#                   100%   14KB  14.1KB/s   00:00    
+sam11_water216.gro                            100% 4286KB   4.2MB/s   00:00    
+#Mini_sam11_water216.tpr.2#                   100% 2004KB   2.0MB/s   00:00    
+#perf.out.3#                                  100%    0     0.0KB/s   00:00    
+Mini_sam11_water216.trr                       100%  746KB 745.6KB/s   00:00    
+#mdout.mdp.5#                                 100%   10KB  10.2KB/s   00:00    
+#Mini_sam11_water216.edr.1#                   100% 1280     1.3KB/s   00:00    
+slurm-491804.out                              100%  122KB 121.6KB/s   00:00    
+sam11_water216_continue8                      100% 1041     1.0KB/s   00:00    
+NVT_sam11_water216.log                        100%   29KB  28.8KB/s   00:00    
+NVT_sam11_water216.xtc                        100%  282MB  70.6MB/s   00:04    
+NPT_water216_shift.gro                        100%   44KB  43.7KB/s   00:00    
+#perf.out.4#                                  100%    0     0.0KB/s   00:00    
+CH3_long.itp                                  100% 4828     4.7KB/s   00:00    
+sam11_water216_continue4                      100% 1041     1.0KB/s   00:00    
+Mini_sam11_water216.tpr                       100% 2004KB   2.0MB/s   00:00    
+g_tune_pme_sam11_water216                     100% 1453     1.4KB/s   00:00    
+traj.xtc                                      100%   31MB  30.8MB/s   00:01    
+ener.edr                                      100% 1560     1.5KB/s   00:00    
+#NVT_sam11_water216.edr.1#                    100% 1240     1.2KB/s   00:00    
+start11.gro                                   100% 2767KB   2.7MB/s   00:00    
+#NVT_sam11_water216.log.1#                    100%   11KB  11.3KB/s   00:00    
+benchtest.log                                 100%   49     0.1KB/s   00:00    
+sam11_water216.top                            100% 6493     6.3KB/s   00:00    
+sam11_water216_continue2                      100% 1131     1.1KB/s   00:00    
+#NVT_sam11_water216.tpr.2#                    100% 2252KB   2.2MB/s   00:00    
+#md.log.1#                                    100%   18KB  18.4KB/s   00:00    
+#benchtest.log.1#                             100%   10KB  10.4KB/s   00:00    
+#traj.trr.1#                                  100% 1491KB   1.5MB/s   00:00    
+sam11_water216                                100% 1444     1.4KB/s   00:00    
+mdout.mdp                                     100%   10KB  10.2KB/s   00:00    
+sam11_water216_continue9                      100% 1043     1.0KB/s   00:00    
+#mdout.mdp.2#                                 100%   10KB  10.2KB/s   00:00    
+Mini_sam11_water216.log                       100%   14KB  14.2KB/s   00:00    
+sam11_water216_continue6                      100% 1041     1.0KB/s   00:00    
+NVT_sam11_water216.tpr                        100% 2252KB   2.2MB/s   00:00    
+OH.itp                                        100% 4683     4.6KB/s   00:00    
+Mini.mdp                                      100%  849     0.8KB/s   00:00    
+T1.itp                                        100%  147     0.1KB/s   00:00    
+#traj.xtc.1#                                  100%   31MB  30.8MB/s   00:01    
+#mdout.mdp.1#                                 100%   10KB  10.2KB/s   00:00    
+#NVT_sam11_water216.trr.1#                    100% 1491KB   1.5MB/s   00:00    
+sam11_water216_continue5                      100% 1041     1.0KB/s   00:00    
+slurm-492854.out                              100% 6734     6.6KB/s   00:00    
+slurm-491849.out                              100%  117KB 117.3KB/s   00:00    
+NVT_sam11_water216.trr                        100% 1491KB   1.5MB/s   00:00    
+#perf.out.2#                                  100%    0     0.0KB/s   00:00    
+#Mini_sam11_water216.trr.1#                   100%  746KB 745.6KB/s   00:00    
+#ener.edr.1#                                  100% 1560     1.5KB/s   00:00    
+#perf.out.1#                                  100%    0     0.0KB/s   00:00    
+state.cpt                                     100% 1493KB   1.5MB/s   00:00    
+NVT_sam11_water216_prev.cpt                   100% 1493KB   1.5MB/s   00:00    
+NVT.mdp                                       100%  926     0.9KB/s   00:00    
+CH3.itp                                       100% 4612     4.5KB/s   00:00    
+sam17_water216_continue2                      100% 1131     1.1KB/s   00:00    
+Mini_sam17_water216.tpr                       100% 1784KB   1.7MB/s   00:00    
+#mdout.mdp.8#                                 100%   10KB  10.2KB/s   00:00    
+slurm-491806.out                              100%   22KB  21.6KB/s   00:00    
+slurm-491798.out                              100% 7223     7.1KB/s   00:00    
+#mdout.mdp.6#                                 100%   10KB  10.2KB/s   00:00    
+Mini_sam17_water216.gro                       100% 2484KB   2.4MB/s   00:00    
+#Mini_sam17_water216.gro.1#                   100% 2484KB   2.4MB/s   00:00    
+slurm-491808.out                              100% 7100     6.9KB/s   00:00    
+sam17_water216_continue5                      100% 1041     1.0KB/s   00:00    
+#mdout.mdp.5#                                 100%   10KB  10.2KB/s   00:00    
+#md.log.8#                                    100%   16KB  16.3KB/s   00:00    
+sam17_water216_continue8                      100% 1041     1.0KB/s   00:00    
+#Mini_sam17_water216.tpr.1#                   100% 1784KB   1.7MB/s   00:00    
+Mini.mdp                                      100%  849     0.8KB/s   00:00    
+T1.itp                                        100%  147     0.1KB/s   00:00    
+#mdout.mdp.1#                                 100%   10KB  10.2KB/s   00:00    
+md.log                                        100%   16KB  16.3KB/s   00:00    
+NVT_sam17_water216_prev.cpt                   100% 1326KB   1.3MB/s   00:00    
+traj.xtc                                      100%    0     0.0KB/s   00:00    
+slurm-491797.out                              100%   21KB  21.4KB/s   00:00    
+Mini_sam17_water216.trr                       100%  662KB 662.5KB/s   00:00    
+sam17_water216                                100% 1444     1.4KB/s   00:00    
+#md.log.1#                                    100% 2931     2.9KB/s   00:00    
+#Mini_sam17_water216.log.2#                   100% 2955     2.9KB/s   00:00    
+NVT_sam17_water216.tpr                        100% 2005KB   2.0MB/s   00:00    
+slurm-492759.out                              100% 6678     6.5KB/s   00:00    
+NVT_sam17_water216.cpt                        100% 1326KB   1.3MB/s   00:00    
+NVT.mdp                                       100%  926     0.9KB/s   00:00    
+#confout.gro.1#                               100% 3809KB   3.7MB/s   00:00    
+Mini_sam17_water216.edr                       100% 1280     1.3KB/s   00:00    
+#Mini_sam17_water216.log.4#                   100%   14KB  14.2KB/s   00:00    
+#traj.trr.1#                                  100% 1325KB   1.3MB/s   00:00    
+CH3.itp                                       100% 4612     4.5KB/s   00:00    
+slurm-491965.out                              100%  106KB 106.4KB/s   00:00    
+#mdout.mdp.2#                                 100%   10KB  10.2KB/s   00:00    
+17pc_1000.top                                 100% 5846     5.7KB/s   00:00    
+NVT_sam17_water216.gro                        100% 3809KB   3.7MB/s   00:00    
+sam17_water216_continue1                      100% 1130     1.1KB/s   00:00    
+slurm-491807.out                              100% 7115     7.0KB/s   00:00    
+sam17_water216.top                            100% 5846     5.7KB/s   00:00    
+#traj.xtc.1#                                  100%    0     0.0KB/s   00:00    
+slurm-491910.out                              100% 7141     7.0KB/s   00:00    
+traj.trr                                      100% 1325KB   1.3MB/s   00:00    
+#mdout.mdp.4#                                 100%   10KB  10.2KB/s   00:00    
+sam17_water216_continue4                      100% 1041     1.0KB/s   00:00    
+#NVT_sam17_water216.log.1#                    100% 2945     2.9KB/s   00:00    
+NPT_water216.gro                              100%   44KB  43.7KB/s   00:00    
+#NVT_sam17_water216.log.2#                    100% 2966     2.9KB/s   00:00    
+#ener.edr.1#                                  100% 1240     1.2KB/s   00:00    
+NPT_water216_shift.gro                        100%   44KB  43.7KB/s   00:00    
+sam17_water216_continue3                      100% 1041     1.0KB/s   00:00    
+#Mini_sam17_water216.log.3#                   100% 2930     2.9KB/s   00:00    
+OH.itp                                        100% 4683     4.6KB/s   00:00    
+#md.log.4#                                    100% 2937     2.9KB/s   00:00    
+NVT_sam17_water216.edr                        100% 1792     1.8KB/s   00:00    
+#mdout.mdp.9#                                 100%   10KB  10.2KB/s   00:00    
+#Mini_sam17_water216.edr.1#                   100% 1280     1.3KB/s   00:00    
+NVT_sam17_water216.trr                        100% 2650KB   2.6MB/s   00:00    
+Mini_sam17_water216.log                       100%   14KB  14.1KB/s   00:00    
+#md.log.2#                                    100% 2923     2.9KB/s   00:00    
+sam17_water216_continue6                      100% 1041     1.0KB/s   00:00    
+slurm-491909.out                              100% 7161     7.0KB/s   00:00    
+slurm-491850.out                              100%   21KB  21.5KB/s   00:00    
+slurm-491853.out                              100% 7142     7.0KB/s   00:00    
+#md.log.7#                                    100% 2954     2.9KB/s   00:00    
+slurm-491908.out                              100%   64KB  63.7KB/s   00:00    
+ener.edr                                      100% 1240     1.2KB/s   00:00    
+#md.log.5#                                    100% 2924     2.9KB/s   00:00    
+sam17_water216_continue7                      100% 1041     1.0KB/s   00:00    
+NVT_sam17_water216.xtc                        100%  277MB  69.3MB/s   00:04    
+CH3_long.itp                                  100% 4828     4.7KB/s   00:00    
+#mdout.mdp.3#                                 100%   10KB  10.2KB/s   00:00    
+#mdout.mdp.7#                                 100%   10KB  10.2KB/s   00:00    
+start17.gro                                   100% 2455KB   2.4MB/s   00:00    
+confout.gro                                   100% 3809KB   3.7MB/s   00:00    
+mdout.mdp                                     100%   10KB  10.2KB/s   00:00    
+#Mini_sam17_water216.log.1#                   100% 2943     2.9KB/s   00:00    
+slurm-491854.out                              100% 7090     6.9KB/s   00:00    
+#NVT_sam17_water216.log.3#                    100% 2960     2.9KB/s   00:00    
+#md.log.3#                                    100% 2937     2.9KB/s   00:00    
+#md.log.6#                                    100% 2955     2.9KB/s   00:00    
+#Mini_sam17_water216.trr.1#                   100%  662KB 662.5KB/s   00:00    
+NVT_sam17_water216.log                        100%   28KB  28.1KB/s   00:00    
+sam17_water216.gro                            100% 3809KB   3.7MB/s   00:01    
+slurm-492758.out                              100% 6470     6.3KB/s   00:00    
+#NVT_sam17_water216.log.4#                    100% 2950     2.9KB/s   00:00    
+sam17_water216_continue9                      100% 1043     1.0KB/s   00:00    
+sam5_water216                                 100% 1431     1.4KB/s   00:00    
+traj.xtc                                      100%  273MB  18.2MB/s   00:15    
+sam5_water216_continue3                       100% 1036     1.0KB/s   00:00    
+state.cpt                                     100% 1477KB   1.4MB/s   00:00    
+#ener.edr.1#                                  100% 1560     1.5KB/s   00:00    
+NPT_water216_shift.gro                        100%   44KB  43.7KB/s   00:00    
+ener.edr                                      100% 1560     1.5KB/s   00:00    
+sam5_water216.top                             100% 6421     6.3KB/s   00:00    
+NVT_sam5_water216.xtc                         100%   39MB  38.6MB/s   00:00    
+CH3_long.itp                                  100% 4828     4.7KB/s   00:00    
+sam5_water216_continue8                       100% 1036     1.0KB/s   00:00    
+Mini_sam5_water216.gro                        100% 2766KB   2.7MB/s   00:00    
+mdout.mdp                                     100%   10KB  10.2KB/s   00:00    
+sam5_water216_continue9                       100% 1038     1.0KB/s   00:00    
+#mdout.mdp.3#                                 100%   10KB  10.2KB/s   00:00    
+slurm-492776.out                              100% 6468     6.3KB/s   00:00    
+#NVT_sam5_water216.edr.1#                     100% 1240     1.2KB/s   00:00    
+Mini_sam5_water216.trr                        100%  738KB 737.8KB/s   00:00    
+sam5_water216_continue1                       100% 1124     1.1KB/s   00:00    
+traj.trr                                      100% 1476KB   1.4MB/s   00:00    
+slurm-491848.out                              100%  116KB 116.0KB/s   00:00    
+md.log                                        100%   27KB  27.5KB/s   00:00    
+#Mini_sam5_water216.trr.1#                    100%  738KB 737.8KB/s   00:00    
+NVT_sam5_water216.log                         100%   29KB  28.6KB/s   00:00    
+OH.itp                                        100% 4683     4.6KB/s   00:00    
+start5.gro                                    100% 2738KB   2.7MB/s   00:00    
+sam5_water216_continue7                       100% 1036     1.0KB/s   00:00    
+#traj.trr.1#                                  100% 1476KB   1.4MB/s   00:00    
+state_prev.cpt                                100% 1477KB   1.4MB/s   00:00    
+#Mini_sam5_water216.log.1#                    100%   14KB  14.2KB/s   00:00    
+sam5_water216_continue5                       100% 1036     1.0KB/s   00:00    
+Mini_sam5_water216.log                        100%   14KB  14.1KB/s   00:00    
+NVT_sam5_water216.tpr                         100% 2227KB   2.2MB/s   00:00    
+T1.itp                                        100%  147     0.1KB/s   00:00    
+NVT_sam5_water216.cpt                         100% 1477KB   1.4MB/s   00:00    
+#mdout.mdp.2#                                 100%   10KB  10.2KB/s   00:00    
+NVT_sam5_water216.edr                         100% 1792     1.8KB/s   00:00    
+#NVT_sam5_water216.tpr.1#                     100% 2227KB   2.2MB/s   00:00    
+sam5_water216_continue6                       100% 1036     1.0KB/s   00:00    
+slurm-493857.out                              100% 6694     6.5KB/s   00:00    
+Mini_sam5_water216.tpr                        100% 1981KB   1.9MB/s   00:00    
+#NVT_sam5_water216.xtc.1#                     100% 1187KB   1.2MB/s   00:00    
+Mini.mdp                                      100%  849     0.8KB/s   00:00    
+#Mini_sam5_water216.tpr.1#                    100% 1981KB   1.9MB/s   00:00    
+sam5_water216_continue4                       100% 1036     1.0KB/s   00:00    
+NVT_sam5_water216_prev.cpt                    100% 1477KB   1.4MB/s   00:00    
+sam5_water216.gro                             100% 4242KB   4.1MB/s   00:00    
+CH3.itp                                       100% 4612     4.5KB/s   00:00    
+#md.log.1#                                    100%   28KB  28.5KB/s   00:00    
+#mdout.mdp.1#                                 100%   10KB  10.2KB/s   00:00    
+#traj.xtc.1#                                  100%  271MB  67.7MB/s   00:04    
+#confout.gro.1#                               100% 4242KB   4.1MB/s   00:00    
+#Mini_sam5_water216.gro.1#                    100% 2766KB   2.7MB/s   00:00    
+NVT.mdp                                       100%  926     0.9KB/s   00:00    
+sam5_water216_continue2                       100% 1126     1.1KB/s   00:00    
+#NVT_sam5_water216.trr.1#                     100% 1476KB   1.4MB/s   00:00    
+NPT_water216.gro                              100%   44KB  43.7KB/s   00:00    
+#Mini_sam5_water216.edr.1#                    100% 1280     1.3KB/s   00:00    
+Mini_sam5_water216.edr                        100% 1280     1.3KB/s   00:00    
+NVT_sam5_water216.trr                         100% 1476KB   1.4MB/s   00:00    
+#NVT_sam5_water216.log.1#                     100%   11KB  11.3KB/s   00:00    
+slurm-491794.out                              100%  115KB 114.9KB/s   00:00    
+confout.gro                                   100% 4242KB   4.1MB/s   00:01    
+[eixeres@soroban finished]$ 
+[eixeres@soroban finished]$ pwd
+/home/eixeres/simulations/finished
+[eixeres@soroban finished]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban finished]$ cd /scratch/eixeres/
+[eixeres@soroban eixeres]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban eixeres]$ cp -r /scratch/eixeres/s0_w216/sam0_water216_extend* /scratch/eixeres/s5_w216/
+cp: cannot stat `/scratch/eixeres/s0_w216/sam0_water216_extend*': No such file or directory
+[eixeres@soroban eixeres]$ cp /scratch/eixeres/s0_w216/sam0_water216_extend* /scratch/eixeres/s5_w216/
+cp: cannot stat `/scratch/eixeres/s0_w216/sam0_water216_extend*': No such file or directory
+[eixeres@soroban eixeres]$ cp /scratch/eixeres/s0_w216/sam0_water216_extend1 /scratch/eixeres/s5_w216/
+cp: cannot stat `/scratch/eixeres/s0_w216/sam0_water216_extend1': No such file or directory
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s0_w216/sam0_water216_extend* /home/eixeres/simulations/finished/s5_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s0_w216/sam0_water216_extend* /home/eixeres/simulations/finished/s11_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s0_w216/sam0_water216_extend* /home/eixeres/simulations/finished/s17_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s17_w216/sam0_water216_extend* /scratch/eixeres/s17_w216/
+cp: cannot stat `/home/eixeres/simulations/finished/s17_w216/sam0_water216_extend*': No such file or directory
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s17_w216/sam17_water216_extend* /scratch/eixeres/s17_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s11_w216/sam11_water216_extend* /scratch/eixeres/s11_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s5_w216/sam5_water216_extend* /scratch/eixeres/s5_w216/
+[eixeres@soroban eixeres]$ cp /home/eixeres/simulations/finished/s0_w216/sam0_water216_extend* /scratch/eixeres/s0_w216/
+[eixeres@soroban eixeres]$ cd /scratch/eixeres/
+[eixeres@soroban eixeres]$ ls
+s0_w216  s11_w216  s17_w216  s5_w216
+[eixeres@soroban eixeres]$ cd s0_w216/
+[eixeres@soroban s0_w216]$ sinfo                                    
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+test         up 3-00:00:00      1  idle~ node002
+test         up 3-00:00:00      1  alloc node001
+main*        up 14-00:00:0      1  down* node061
+main*        up 14-00:00:0      4   drng node[044,075,086,108]
+main*        up 14-00:00:0    105  alloc node[003-043,045-060,062-074,076-085,087-107,109-112]
+gpu          up 14-00:00:0      1  idle~ gpu01
+[eixeres@soroban s0_w216]$ srun -p test -n 4 --mem=500 --pty bash -i
+[eixeres@node001 s0_w216]$ squeue -u eixeres
+  JOBID PARTITION     NAME     USER  ST       TIME  NODES NODELIST(REASON)
+ 499695      test     bash  eixeres   R       7:30      1 node001
+[eixeres@node001 s0_w216]$ scancel 499695
+srun: Force Terminated job 499695
+                                 [eixeres@node001 s0_w216]$ srun: Job step aborted: Waiting up to 2 seconds for job step to finish.
+                                                   srun: error: Timed out waiting for job step to complete
+                          [eixeres@soroban s0_w216]$ 
+[eixeres@soroban s0_w216]$ salloc --ntasks=4 --time=00:10:00 --mem=500
+salloc: Pending job allocation 499696
+salloc: job 499696 queued and waiting for resources
+salloc: job 499696 has been allocated resources
+salloc: Granted job allocation 499696
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+[eixeres@soroban s0_w216]$ load module gromacs
+bash: load: command not found
+[eixeres@soroban s0_w216]$ load slurm
+bash: load: command not found
+[eixeres@soroban s0_w216]$ module load gromacs
+[eixeres@soroban s0_w216]$ module load slurm  
+[eixeres@soroban s0_w216]$ tpbconv -s NVT_sam0_water216.tpr -until 60000 -o NVT_sam0_water216_next.tpr
+                         :-)  G  R  O  M  A  C  S  (-:
+
+                   Good gRace! Old Maple Actually Chews Slate
+
+                            :-)  VERSION 4.5.5  (-:
+
+        Written by Emile Apol, Rossen Apostolov, Herman J.C. Berendsen,
+      Aldert van Buuren, Pär Bjelkmar, Rudi van Drunen, Anton Feenstra, 
+        Gerrit Groenhof, Peter Kasson, Per Larsson, Pieter Meulenhoff, 
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz, 
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+            Copyright (c) 2001-2010, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+          modify it under the terms of the GNU General Public License
+         as published by the Free Software Foundation; either version 2
+             of the License, or (at your option) any later version.
+
+                               :-)  tpbconv  (-:
+
+Option     Filename  Type         Description
+------------------------------------------------------------
+  -s NVT_sam0_water216.tpr  Input        Run input file: tpr tpb tpa
+  -f       traj.trr  Input, Opt.  Full precision trajectory: trr trj cpt
+  -e       ener.edr  Input, Opt.  Energy file
+  -n      index.ndx  Input, Opt.  Index file
+  -o NVT_sam0_water216_next.tpr  Output       Run input file: tpr tpb tpa
+
+Option       Type   Value   Description
+------------------------------------------------------
+-[no]h       bool   no      Print help info and quit
+-[no]version bool   no      Print version info and quit
+-nice        int    0       Set the nicelevel
+-extend      real   0       Extend runtime by this amount (ps)
+-until       real   60000   Extend runtime until this ending time (ps)
+-nsteps      int    0       Change the number of steps
+-time        real   -1      Continue from frame at this time (ps) instead of
+                            the last frame
+-[no]zeroq   bool   no      Set the charges of a group (from the index) to
+                            zero
+-[no]vel     bool   yes     Require velocities from trajectory
+-[no]cont    bool   yes     For exact continuation, the constraints should
+                            not be applied before the first step
+
+Reading toplogy and stuff from NVT_sam0_water216.tpr
+Reading file NVT_sam0_water216.tpr, VERSION 4.5.5 (single precision)
+nsteps = 10000000, run_step = 0, current_t = 0, until = 60000
+Extending remaining runtime until 60000 ps (now 30000000 steps)
+Writing statusfile with starting step          0 and length   30000000 steps...
+                                 time      0.000 and length  60000.000 ps
+
+gcq#235: "Right Now My Job is Eating These Doughnuts" (Bodycount)
+
+[eixeres@soroban s0_w216]$ mdrun -nt 72 -s NVT_sam0_water216_next.tpr -cpi NVT_sam0_water216.cpt -maxh 48
+                         :-)  G  R  O  M  A  C  S  (-:
+
+               GRoups of Organic Molecules in ACtion for Science
+
+                            :-)  VERSION 4.5.5  (-:
+
+        Written by Emile Apol, Rossen Apostolov, Herman J.C. Berendsen,
+      Aldert van Buuren, Pär Bjelkmar, Rudi van Drunen, Anton Feenstra, 
+        Gerrit Groenhof, Peter Kasson, Per Larsson, Pieter Meulenhoff, 
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz, 
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+            Copyright (c) 2001-2010, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+          modify it under the terms of the GNU General Public License
+         as published by the Free Software Foundation; either version 2
+             of the License, or (at your option) any later version.
+
+                                :-)  mdrun  (-:
+
+Option     Filename  Type         Description
+------------------------------------------------------------
+  -s NVT_sam0_water216_next.tpr  Input        Run input file: tpr tpb tpa
+  -o       traj.trr  Output       Full precision trajectory: trr trj cpt
+  -x       traj.xtc  Output, Opt. Compressed trajectory (portable xdr format)
+-cpi NVT_sam0_water216.cpt  Input, Opt!  Checkpoint file
+-cpo      state.cpt  Output, Opt. Checkpoint file
+  -c    confout.gro  Output       Structure file: gro g96 pdb etc.
+  -e       ener.edr  Output       Energy file
+  -g         md.log  Output       Log file
+-dhdl      dhdl.xvg  Output, Opt. xvgr/xmgr file
+-field    field.xvg  Output, Opt. xvgr/xmgr file
+-table    table.xvg  Input, Opt.  xvgr/xmgr file
+-tablep  tablep.xvg  Input, Opt.  xvgr/xmgr file
+-tableb   table.xvg  Input, Opt.  xvgr/xmgr file
+-rerun    rerun.xtc  Input, Opt.  Trajectory: xtc trr trj gro g96 pdb cpt
+-tpi        tpi.xvg  Output, Opt. xvgr/xmgr file
+-tpid   tpidist.xvg  Output, Opt. xvgr/xmgr file
+ -ei        sam.edi  Input, Opt.  ED sampling input
+ -eo        sam.edo  Output, Opt. ED sampling output
+  -j       wham.gct  Input, Opt.  General coupling stuff
+ -jo        bam.gct  Output, Opt. General coupling stuff
+-ffout      gct.xvg  Output, Opt. xvgr/xmgr file
+-devout   deviatie.xvg  Output, Opt. xvgr/xmgr file
+-runav  runaver.xvg  Output, Opt. xvgr/xmgr file
+ -px      pullx.xvg  Output, Opt. xvgr/xmgr file
+ -pf      pullf.xvg  Output, Opt. xvgr/xmgr file
+-mtx         nm.mtx  Output, Opt. Hessian matrix
+ -dn     dipole.ndx  Output, Opt. Index file
+-multidir    rundir  Input, Opt., Mult. Run directory
+
+Option       Type   Value   Description
+------------------------------------------------------
+-[no]h       bool   no      Print help info and quit
+-[no]version bool   no      Print version info and quit
+-nice        int    0       Set the nicelevel
+-deffnm      string         Set the default filename for all file options
+-xvg         enum   xmgrace  xvg plot formatting: xmgrace, xmgr or none
+-[no]pd      bool   no      Use particle decompostion
+-dd          vector 0 0 0   Domain decomposition grid, 0 is optimize
+-nt          int    72      Number of threads to start (0 is guess)
+-npme        int    -1      Number of separate nodes to be used for PME, -1
+                            is guess
+-ddorder     enum   interleave  DD node order: interleave, pp_pme or cartesian
+-[no]ddcheck bool   yes     Check for all bonded interactions with DD
+-rdd         real   0       The maximum distance for bonded interactions with
+                            DD (nm), 0 is determine from initial coordinates
+-rcon        real   0       Maximum distance for P-LINCS (nm), 0 is estimate
+-dlb         enum   auto    Dynamic load balancing (with DD): auto, no or yes
+-dds         real   0.8     Minimum allowed dlb scaling of the DD cell size
+-gcom        int    -1      Global communication frequency
+-[no]v       bool   no      Be loud and noisy
+-[no]compact bool   yes     Write a compact log file
+-[no]seppot  bool   no      Write separate V and dVdl terms for each
+                            interaction type and node to the log file(s)
+-pforce      real   -1      Print all forces larger than this (kJ/mol nm)
+-[no]reprod  bool   no      Try to avoid optimizations that affect binary
+                            reproducibility
+-cpt         real   15      Checkpoint interval (minutes)
+-[no]cpnum   bool   no      Keep and number checkpoint files
+-[no]append  bool   yes     Append to previous output files when continuing
+                            from checkpoint instead of adding the simulation
+                            part number to all file names
+-maxh        real   48      Terminate after 0.99 times this time (hours)
+-multi       int    0       Do multiple simulations in parallel
+-replex      int    0       Attempt replica exchange every # steps
+-reseed      int    -1      Seed for replica exchange, -1 is generate a seed
+-[no]ionize  bool   no      Do a simulation including the effect of an X-Ray
+                            bombardment on your system
+
+
+Back Off! I just backed up md.log to ./#md.log.4#
+Reading file NVT_sam0_water216_next.tpr, VERSION 4.5.5 (single precision)
+Starting 72 threads
+
+Reading checkpoint file NVT_sam0_water216.cpt generated: Thu Jul 24 07:33:32 2014
+
+
+Gromacs binary or parallel settings not identical to previous run.
+Continuation is exact, but is not guaranteed to be binary identical,
+ see the log file for details.
+
+Making 2D domain decomposition 12 x 6 x 1
+
+Back Off! I just backed up traj.trr to ./#traj.trr.3#
+
+Back Off! I just backed up traj.xtc to ./#traj.xtc.3#
+
+Back Off! I just backed up ener.edr to ./#ener.edr.3#
+starting mdrun 'Protein in water'
+30000000 steps,  60000.0 ps (continuing from step 10000000,  20000.0 ps).
+^C
+
+Received the INT signal, stopping at the next NS step
+
+
+ Average load imbalance: 1411.7 %
+ Part of the total run time spent waiting due to load imbalance: 1.4 %
+
+
+	Parallel run - timing based on wallclock.
+
+               NODE (s)   Real (s)      (%)
+       Time:     47.102     47.102    100.0
+               (Mnbf/s)   (GFlops)   (ns/day)  (hour/ns)
+Performance:      3.989     37.210      9.469      2.535
+
+gcq#32: "In a Deep Deep Well" (Nick Cave)
+
+[eixeres@soroban s0_w216]$ g_tune_pme -nt 72 -s NVT_sam0_water216_next.tpr -cpi NVT_sam0_water216.cpt -maxh 48
+                         :-)  G  R  O  M  A  C  S  (-:
+
+                              S  C  A  M  O  R  G
+
+                            :-)  VERSION 4.5.5  (-:
+
+        Written by Emile Apol, Rossen Apostolov, Herman J.C. Berendsen,
+      Aldert van Buuren, Pär Bjelkmar, Rudi van Drunen, Anton Feenstra, 
+        Gerrit Groenhof, Peter Kasson, Per Larsson, Pieter Meulenhoff, 
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz, 
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+            Copyright (c) 2001-2010, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+          modify it under the terms of the GNU General Public License
+         as published by the Free Software Foundation; either version 2
+             of the License, or (at your option) any later version.
+
+                              :-)  g_tune_pme  (-:
+
+Option     Filename  Type         Description
+------------------------------------------------------------
+  -p       perf.out  Output       Generic output file
+-err     errors.log  Output       Log file
+ -so      tuned.tpr  Output       Run input file: tpr tpb tpa
+  -s NVT_sam0_water216_next.tpr  Input        Run input file: tpr tpb tpa
+  -o       traj.trr  Output       Full precision trajectory: trr trj cpt
+  -x       traj.xtc  Output, Opt. Compressed trajectory (portable xdr format)
+-cpi NVT_sam0_water216.cpt  Input, Opt!  Checkpoint file
+-cpo      state.cpt  Output, Opt. Checkpoint file
+  -c    confout.gro  Output       Structure file: gro g96 pdb etc.
+  -e       ener.edr  Output       Energy file
+  -g         md.log  Output       Log file
+-dhdl      dhdl.xvg  Output, Opt. xvgr/xmgr file
+-field    field.xvg  Output, Opt. xvgr/xmgr file
+-table    table.xvg  Input, Opt.  xvgr/xmgr file
+-tablep  tablep.xvg  Input, Opt.  xvgr/xmgr file
+-tableb   table.xvg  Input, Opt.  xvgr/xmgr file
+-rerun    rerun.xtc  Input, Opt.  Trajectory: xtc trr trj gro g96 pdb cpt
+-tpi        tpi.xvg  Output, Opt. xvgr/xmgr file
+-tpid   tpidist.xvg  Output, Opt. xvgr/xmgr file
+ -ei        sam.edi  Input, Opt.  ED sampling input
+ -eo        sam.edo  Output, Opt. ED sampling output
+  -j       wham.gct  Input, Opt.  General coupling stuff
+ -jo        bam.gct  Output, Opt. General coupling stuff
+-ffout      gct.xvg  Output, Opt. xvgr/xmgr file
+-devout   deviatie.xvg  Output, Opt. xvgr/xmgr file
+-runav  runaver.xvg  Output, Opt. xvgr/xmgr file
+ -px      pullx.xvg  Output, Opt. xvgr/xmgr file
+ -pf      pullf.xvg  Output, Opt. xvgr/xmgr file
+-mtx         nm.mtx  Output, Opt. Hessian matrix
+ -dn     dipole.ndx  Output, Opt. Index file
+ -bo      bench.trr  Output       Full precision trajectory: trr trj cpt
+ -bx      bench.xtc  Output       Compressed trajectory (portable xdr format)
+-bcpo     bench.cpt  Output       Checkpoint file
+ -bc      bench.gro  Output       Structure file: gro g96 pdb etc.
+ -be      bench.edr  Output       Energy file
+ -bg      bench.log  Output       Log file
+-beo      bench.edo  Output, Opt. ED sampling output
+-bdhdl  benchdhdl.xvg  Output, Opt. xvgr/xmgr file
+-bfield   benchfld.xvg  Output, Opt. xvgr/xmgr file
+-btpi  benchtpi.xvg  Output, Opt. xvgr/xmgr file
+-btpid  benchtpid.xvg  Output, Opt. xvgr/xmgr file
+-bjo      bench.gct  Output, Opt. General coupling stuff
+-bffout   benchgct.xvg  Output, Opt. xvgr/xmgr file
+-bdevout   benchdev.xvg  Output, Opt. xvgr/xmgr file
+-brunav  benchrnav.xvg  Output, Opt. xvgr/xmgr file
+-bpx    benchpx.xvg  Output, Opt. xvgr/xmgr file
+-bpf    benchpf.xvg  Output, Opt. xvgr/xmgr file
+-bmtx    benchn.mtx  Output, Opt. Hessian matrix
+-bdn      bench.ndx  Output, Opt. Index file
+
+Option       Type   Value   Description
+------------------------------------------------------
+-[no]h       bool   no      Print help info and quit
+-[no]version bool   no      Print version info and quit
+-nice        int    0       Set the nicelevel
+-xvg         enum   xmgrace  xvg plot formatting: xmgrace, xmgr or none
+-np          int    1       Number of nodes to run the tests on (must be > 2
+                            for separate PME nodes)
+-npstring    enum   -np     Specify the number of processors to $MPIRUN using
+                            this string: -np, -n or none
+-nt          int    72      Number of threads to run the tests on (turns MPI
+                            & mpirun off)
+-r           int    2       Repeat each test this often
+-max         real   0.5     Max fraction of PME nodes to test with
+-min         real   0.25    Min fraction of PME nodes to test with
+-npme        enum   auto    Benchmark all possible values for -npme or just
+                            the subset that is expected to perform well:
+                            auto, all or subset
+-fix         int    -2      If >= -1, do not vary the number of PME-only
+                            nodes, instead use this fixed value and only vary
+                            rcoulomb and the PME grid spacing.
+-upfac       real   1.2     Upper limit for rcoulomb scaling factor (Note
+                            that rcoulomb upscaling results in fourier grid
+                            downscaling)
+-downfac     real   1       Lower limit for rcoulomb scaling factor
+-ntpr        int    0       Number of .tpr files to benchmark. Create this
+                            many files with scaling factors ranging from 1.0
+                            to fac. If < 1, automatically choose the number
+                            of .tpr files to test
+-four        real   0       Use this fourierspacing value instead of the grid
+                            found in the .tpr input file. (Spacing applies to
+                            a scaling factor of 1.0 if multiple .tpr files
+                            are written)
+-steps       step   1000    Take timings for this many steps in the benchmark
+                            runs
+-resetstep   int    100     Let dlb equilibrate this many steps before
+                            timings are taken (reset cycle counters after
+                            this many steps)
+-simsteps    step   -1      If non-negative, perform this many steps in the
+                            real run (overwrites nsteps from .tpr, add .cpt
+                            steps)
+-[no]launch  bool   no      Launch the real simulation after optimization
+-deffnm      string         Set the default filename for all file options at
+                            launch time
+-ddorder     enum   interleave  DD node order: interleave, pp_pme or cartesian
+-[no]ddcheck bool   yes     Check for all bonded interactions with DD
+-rdd         real   0       The maximum distance for bonded interactions with
+                            DD (nm), 0 is determine from initial coordinates
+-rcon        real   0       Maximum distance for P-LINCS (nm), 0 is estimate
+-dlb         enum   auto    Dynamic load balancing (with DD): auto, no or yes
+-dds         real   0.8     Minimum allowed dlb scaling of the DD cell size
+-gcom        int    -1      Global communication frequency
+-[no]v       bool   no      Be loud and noisy
+-[no]compact bool   yes     Write a compact log file
+-[no]seppot  bool   no      Write separate V and dVdl terms for each
+                            interaction type and node to the log file(s)
+-pforce      real   -1      Print all forces larger than this (kJ/mol nm)
+-[no]reprod  bool   no      Try to avoid optimizations that affect binary
+                            reproducibility
+-cpt         real   15      Checkpoint interval (minutes)
+-[no]cpnum   bool   no      Keep and number checkpoint files
+-[no]append  bool   yes     Append to previous output files when continuing
+                            from checkpoint instead of adding the simulation
+                            part number to all file names (for launch only)
+-maxh        real   48      Terminate after 0.99 times this time (hours)
+-multi       int    0       Do multiple simulations in parallel
+-replex      int    0       Attempt replica exchange every # steps
+-reseed      int    -1      Seed for replica exchange, -1 is generate a seed
+-[no]ionize  bool   no      Do a simulation including the effect of an X-ray
+                            bombardment on your system
+
+Will test 3 tpr files.
+Will try runs with 18 - 36 PME-only nodes.
+  Note that the automatic number of PME-only nodes and no separate PME nodes are always tested.
+Making sure that mdrun can be executed. Trying 'mdrun -nt 72 -version -maxh 0.001 1> benchtest.log 2>&1' ... passed.
+Making benchmark tpr files with 1100 time steps (adding 10000000 steps from checkpoint file).
+Reading file NVT_sam0_water216_next.tpr, VERSION 4.5.5 (single precision)
+Calculating PME grid points on the basis of a fourierspacing of 0.120000 nm
+Possible PME grid settings (apart from input file settings):
+  nkx  nky  nkz  max spacing  scaling factor
+  128  112  100     0.123718     1.030982
+  120  112   96     0.125000     1.041667
+  120  108   96     0.128300     1.069167
+  120  108   90     0.133333     1.111111
+  112  108   90     0.133929     1.116071
+  112  100   90     0.138564     1.154700
+  108  100   90     0.138889     1.157408
+  108  100   84     0.142857     1.190476
+  108   96   84     0.144337     1.202812
+Writing benchmark tpr NVT_sam0_water216_next_bench00.tpr with nsteps=10001100, unmodified settings
+Writing benchmark tpr NVT_sam0_water216_next_bench01.tpr with nsteps=10001100, scaling factor 1.030982
+Writing benchmark tpr NVT_sam0_water216_next_bench02.tpr with nsteps=10001100, scaling factor 1.202812
+Will try the following 15 different values for -npme:
+36, 34, 33, 32, 30, 28, 27, 26, 24, 22, 21, 20, 18, 0, and -1 (auto).
+
+=== Progress  0%, tpr 1/3, run 1/15, pass 1/2:
+mdrun -nt 72 -npme 36 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme36
+
+=== Progress  1%, tpr 1/3, run 1/15, pass 2/2:
+mdrun -nt 72 -npme 36 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme36_1
+
+=== Progress  2%, tpr 1/3, run 2/15, pass 1/2:
+mdrun -nt 72 -npme 34 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+
+WARNING: A fatal error has occured during this benchmark:
+The number of nodes you selected (38) contains a large prime factor 19. In most cases this will lead to bad performance. Choose a number with smaller prime factors or set the decomposition (option -dd) manually.
+
+Cleaning up, deleting benchmark temp files ...
+Saving stderr output in errors.log_no0_np72_npme34
+renaming log file to bench.log_no0_np72_npme34
+Skipping remaining passes of unsuccessful setting, see log file for details.
+
+=== Progress  4%, tpr 1/3, run 3/15, pass 1/2:
+mdrun -nt 72 -npme 33 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+
+WARNING: A fatal error has occured during this benchmark:
+The number of nodes you selected (39) contains a large prime factor 13. In most cases this will lead to bad performance. Choose a number with smaller prime factors or set the decomposition (option -dd) manually.
+
+Cleaning up, deleting benchmark temp files ...
+Saving stderr output in errors.log_no0_np72_npme33
+renaming log file to bench.log_no0_np72_npme33
+Skipping remaining passes of unsuccessful setting, see log file for details.
+
+=== Progress  7%, tpr 1/3, run 4/15, pass 1/2:
+mdrun -nt 72 -npme 32 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme32
+
+=== Progress  8%, tpr 1/3, run 4/15, pass 2/2:
+mdrun -nt 72 -npme 32 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme32_1
+
+=== Progress  9%, tpr 1/3, run 5/15, pass 1/2:
+mdrun -nt 72 -npme 30 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme30
+
+=== Progress 10%, tpr 1/3, run 5/15, pass 2/2:
+mdrun -nt 72 -npme 30 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme30_1
+
+=== Progress 11%, tpr 1/3, run 6/15, pass 1/2:
+mdrun -nt 72 -npme 28 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+Cleaning up, deleting benchmark temp files ...
+Deleting errors.log
+Deleting bench.trr
+Deleting bench.xtc
+Deleting bench.cpt
+Deleting bench.gro
+Deleting bench.edr
+renaming log file to bench.log_no0_np72_npme28
+
+=== Progress 12%, tpr 1/3, run 6/15, pass 2/2:
+mdrun -nt 72 -npme 28 -s NVT_sam0_water216_next_bench00.tpr -resetstep 100 -cpi NVT_sam0_water216.cpt -o bench.trr -x bench.xtc -cpo bench.cpt -c bench.gro -e bench.edr -g bench.log 
+salloc: Job allocation 499696 has been revoked.
+Hangup
+[eixeres@soroban s0_w216]$ 

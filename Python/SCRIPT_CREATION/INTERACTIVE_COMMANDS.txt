@@ -1,0 +1,10 @@
+SHELDON (torque PBS)
+
+ qsub -l nodes=1:ppn=1,walltime=0:10:00 -I
+ 
+ 
+*** qstat -n1 gives you the information on which node your jobs are running.
+
+***pbsnodes -a             # show status of all nodes (free ones at the end of list)
+***pbsnodes -a <node>      # show status of specified node
+***pbsnodes -l             # list inactive nodes
