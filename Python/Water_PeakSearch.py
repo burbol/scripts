@@ -63,9 +63,9 @@ xvg = gromacs.formats.XVG()
 
 
 # Name of the file where the Contact Angles will be saved
-myfile1 = open('WaterPeaks1.txt', 'w')
+myfile1 = open('WaterPeak1.txt', 'w')
 print >> myfile1, '{0}  {1}'.format('File', 'Water Peaks')
-myfile = open('WaterPeaks.txt', 'w')
+myfile = open('WaterPeak.txt', 'w')
 print >> myfile, '{0}'.format('Water Peaks Position')
 
 #pp = PdfPages('/Users/burbol/Downloads/global_density_maps/densplots.pdf')

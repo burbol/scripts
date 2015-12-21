@@ -57,12 +57,12 @@ outputfolder = parentfolder
 
 # Percentage of -OH coverage (polarity) of the SAMs 
 
-SAMs=[5, 21, 25, 41]
+SAMs=[25]
 
 #Number of water molecules in the droplets
 
-#Waters=[4000]
-Waters=[2000, 3000, 4000, 5000, 6500, 8000, 9000]
+Waters=[2000]
+#Waters=[2000, 3000, 4000, 5000, 6500, 8000, 9000]
 
 
 # Length of longest interval analyzed. In the shorter simulations
@@ -85,9 +85,9 @@ boxlength={5: 20.0, 21: 20.0, 25: 20.0, 41: 20.0}
 # d) for Middle Point
 # e) for highest carbon in SAM
 
-option= 'a'
+option= 'e'
 if option == 'a':
-    interface='WaterPeaks'
+    interface='WaterPeak'
 elif option == 'b':
     interface='GDS'
 elif option == 'c':
@@ -138,9 +138,15 @@ for pc in SAMs:
 
     # Define names of output files: 
     
-    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'D.txt'
-    txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'D.txt'
-    plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'D.pdf'
+#     # Name for single file with all systems with same SAM percentage
+#     txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'.txt'
+#     txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'.txt
+#     plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'.txt'
+    
+    # Name for single system files
+    txtoutput2 = outputfolder + 'Contact_Angles2_' + interface +'_s'+str(pc)+'_w'+str(Waters[0])+'.txt'
+    txtoutput = outputfolder + 'Contact_Angles_' + interface +'_s'+str(pc)+'_w'+str(Waters[0])+'.txt'
+    plotsOutput = outputfolder + interface + 'Circle_plots_s'+str(pc)+'_w'+str(Waters[0])+'.txt'
 
 
     # Create (open) output files: 
@@ -175,7 +181,7 @@ for pc in SAMs:
             # Define name of folder where density profiles are stored
             # (using SAM's polarity and number of water molecules. For
             # example s25_w2000)
-            simulation_folder = parentfolder + 's'+str(pc) + '_w' + str(molecs)
+            simulation_folder = parentfolder + 's'+str(pc) + '_w' + str(molecs) + '/part002'
                 
             os.chdir(simulation_folder)
             
