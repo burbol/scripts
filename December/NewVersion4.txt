@@ -1,9 +1,0 @@
-import matplotlib 
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.optimize import curve_fit
-from scipy import stats
-from matplotlib.font_manager import FontProperties
-from fractions import Fraction
-from scipy.interpolate import interp1d
-import os
