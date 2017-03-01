@@ -96,8 +96,13 @@ do
     echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
     #cp ng_density_SAM_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
 
-#cp g_density_SAM_sam${i}_water${j}.xvg /home/eixeres/files_for_laila/global_SAMS_densmaps/
-#rm g_density_NVT_sam${i}_water${j}.xvg	
+# Move all files to same folder
+mv g_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/g_density_NVT_sam${i}_water${j}.xvg
+mv g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/g_density_SAM_sam${i}_water${j}.xvg
+mv ng_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/ng_density_NVT_sam${i}_water${j}.xvg 
+mv ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/ng_density_SAM_sam${i}_water${j}.xvg
+
+#######################################################################
 
     #k=200
     k=0
