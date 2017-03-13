@@ -83,17 +83,17 @@ do
  
     /net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
     
-    echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
-    echo "6" | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
+    echo ${n} | gmx density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    echo "6" | gmx density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
     
 
     # atom number global density maps
     
     #grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
-    echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    echo ${n} | gmx density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000
     #cp    ng_density_NVT_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
     
-    echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
+    echo "5" |gmx density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
     #cp ng_density_SAM_sam${i}_water${j}.xvg /home/eixeres/Dropbox/Apps/Computable/December/StepByStepDropletMethod/
 
 # Move all files to same folder
