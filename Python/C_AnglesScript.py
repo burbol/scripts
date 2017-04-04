@@ -44,12 +44,8 @@ from gromacs.formats import XVG
 # density profiles folders, "peaksfolder" stores the .txt files with
 # the interface positions, and "outputfolder" the output files
 
-#parentfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
-#peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
-
-#parentfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
-parentfolder = "/Volumes/UNI/Densmaps_NewVersion4/"
-peaksfolder = parentfolder
+parentfolder = "/net/data/eixeres/Version_v2/radial_densmaps/" #densmaps
+peaksfolder = parentfolder #interface positions
 outputfolder = parentfolder
 
 
@@ -57,19 +53,18 @@ outputfolder = parentfolder
 
 # Percentage of -OH coverage (polarity) of the SAMs 
 
-SAMs=[25]
-
+SAMs=[0]
+#SAMs=[0, 11, 22, 33, 37, 44]
 #Number of water molecules in the droplets
 
-Waters=[2000]
-#Waters=[2000, 3000, 4000, 5000, 6500, 8000, 9000]
-
+Waters=[1000]
+#Waters=[1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
 
 # Length of longest interval analyzed. In the shorter simulations
 # 'NaN' will be returned for each time step that does not exist
 
 start_time = 0
-end_time = 100
+end_time = 200
 timestep = 0.5
 
 
@@ -85,7 +80,7 @@ boxlength={5: 20.0, 21: 20.0, 25: 20.0, 41: 20.0}
 # d) for Middle Point
 # e) for highest carbon in SAM
 
-option= 'e'
+option= 'b'
 if option == 'a':
     interface='WaterPeak'
 elif option == 'b':
@@ -105,9 +100,8 @@ file_pos_interface = peaksfolder + interface + '.txt'
 
 # Systems that appear in file with interface positions:
 
-SAMpeaks = [5,21,25,41]
-#SAMpeaks=[0,5,11,17,21,25,33,41,50,66]
-Waterpeaks=[2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]
+SAMpeaks=[0, 11, 22, 33, 37, 44]
+Waterpeaks=[1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
 
             
 # Store interface positions in array "interface_data"
